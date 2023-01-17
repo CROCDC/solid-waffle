@@ -1,8 +1,8 @@
 package com.crocdc.solidwaffle.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -30,5 +30,17 @@ class PokemonListingFragment : Fragment(R.layout.fragment_pokemon_listing) {
                 pokemonAdapter.submitList(it)
             }
         }
+        binding.search.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(p0: String?): Boolean = false
+
+                override fun onQueryTextChange(query: String?): Boolean {
+                    lifecycleScope.launch {
+                        viewModel.setQuery(query)
+                    }
+                    return true
+                }
+            }
+        )
     }
 }

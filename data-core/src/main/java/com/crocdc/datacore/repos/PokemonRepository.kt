@@ -14,11 +14,15 @@ class PokemonRepository @Inject constructor(
     private val dataSource: PokemonDataSourceProvider
 ) {
 
-    fun getPokemonsListing(): Flow<List<Pokemon>> = networkBoundResource(
+    fun getPokemonsListing(query: String?): Flow<List<Pokemon>> = networkBoundResource(
         query = {
-            // todo improve image get
-            dao.getAll().map { pokemonEntities ->
+            if (query == null) {
+                dao.getAll()
+            } else {
+                dao.search(query)
+            }.map { pokemonEntities ->
                 pokemonEntities.map {
+                    // todo improve image get
                     Pokemon(
                         it.name,
                         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${it.id}.png"

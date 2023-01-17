@@ -39,10 +39,10 @@ class PokemonDaoTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     @Throws(Exception::class)
-    fun saveAndGetAll() = runTest {
+    fun saveAndSearch() = runTest {
         val productEntity = PokemonEntity("7", "Squirtle")
         pokemonDao.saveAll(listOf(productEntity))
-        pokemonDao.getAll().take(1).collect {
+        pokemonDao.search("S").take(1).collect {
             assertEquals(productEntity.id, it[0].id)
         }
     }
