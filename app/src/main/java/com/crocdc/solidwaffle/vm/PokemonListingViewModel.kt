@@ -11,5 +11,4 @@ import javax.inject.Inject
 class PokemonListingViewModel @Inject constructor(repository: PokemonRepository) : ViewModel() {
 
     val pokemons: Flow<List<Pokemon>> = repository.getPokemonsListing()
-
 }
