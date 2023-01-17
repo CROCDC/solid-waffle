@@ -7,8 +7,9 @@ import com.squareup.moshi.Moshi
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import javax.inject.Inject
 
-class PokemonDataSource(
+class PokemonDataSource @Inject constructor(
     private val okHttpClient: OkHttpClient, private val moshi: Moshi
 ) : PokemonDataSourceProvider {
 
