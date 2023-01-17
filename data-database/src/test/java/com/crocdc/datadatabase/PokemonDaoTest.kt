@@ -40,7 +40,7 @@ class PokemonDaoTest {
     @Test
     @Throws(Exception::class)
     fun saveAndGetAll() = runTest {
-        val productEntity = PokemonEntity("4", "Charmander")
+        val productEntity = PokemonEntity("7", "Squirtle")
         productDao.saveAll(listOf(productEntity))
         productDao.getAll().take(1).collect {
             assertEquals(productEntity.id, it[0].id)
