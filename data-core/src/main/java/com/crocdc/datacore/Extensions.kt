@@ -1,11 +1,11 @@
 package com.crocdc.datacore
 
-import com.crocdc.datanetworking.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flowOn
 
 // TODO improve status
 inline fun <ResultType, RequestType> networkBoundResource(
@@ -32,4 +32,4 @@ inline fun <ResultType, RequestType> networkBoundResource(
     }
 
     emitAll(flow)
-}
+}.flowOn(Dispatchers.IO)
