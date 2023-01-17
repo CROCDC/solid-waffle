@@ -1,4 +1,7 @@
 package com.crocdc.datanetworking.model
 
-data class PokemonListing(private val name: String, private val url: String)
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class PokemonListing(val name: String, val url: String)
 

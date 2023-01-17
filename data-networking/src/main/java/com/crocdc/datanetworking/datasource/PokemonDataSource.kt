@@ -9,19 +9,14 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 
 class PokemonDataSource(
-    private val okHttpClient: OkHttpClient,
-    private val moshi: Moshi
-) {
+    private val okHttpClient: OkHttpClient, private val moshi: Moshi
+) : PokemonDataSourceProvider {
 
-    fun getPokemons(): Resource<PokemonsResponse> {
-        val request = HttpUrl.Builder()
-            .scheme("https")
-            .host(BuildConfig.URL_API)
-            .addPathSegment("api")
-            .addPathSegment("v2")
-            .addPathSegment("pokemon")
-            .addQueryParameter("limit", "151")
-            .build()
+    override fun getPokemonsListing(): Resource<PokemonsResponse> {
+        val request =
+            HttpUrl.Builder().scheme("https").host(BuildConfig.URL_API).addPathSegment("api")
+                .addPathSegment("v2").addPathSegment("pokemon").addQueryParameter("limit", "151")
+                .build()
 
         val response = okHttpClient.newCall(Request.Builder().url(request).build()).execute()
         val json = response.body?.source()
