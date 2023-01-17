@@ -1,4 +1,4 @@
-package com.crocdc.solidwaffle.fragments
+package com.crocdc.solidwaffle.vm
 
 import androidx.lifecycle.ViewModel
 import com.crocdc.datacore.model.Pokemon
