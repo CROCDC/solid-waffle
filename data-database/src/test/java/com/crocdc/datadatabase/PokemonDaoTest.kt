@@ -18,7 +18,7 @@ import java.io.IOException
 @RunWith(RobolectricTestRunner::class)
 class PokemonDaoTest {
 
-    private lateinit var productDao: PokemonDao
+    private lateinit var pokemonDao: PokemonDao
     private lateinit var db: PokemonDatabase
 
     @Before
@@ -27,7 +27,7 @@ class PokemonDaoTest {
         db = Room.inMemoryDatabaseBuilder(
             context, PokemonDatabase::class.java
         ).allowMainThreadQueries().build()
-        productDao = db.productDao()
+        pokemonDao = db.pokemonDao()
     }
 
     @After
@@ -41,8 +41,8 @@ class PokemonDaoTest {
     @Throws(Exception::class)
     fun saveAndGetAll() = runTest {
         val productEntity = PokemonEntity("7", "Squirtle")
-        productDao.saveAll(listOf(productEntity))
-        productDao.getAll().take(1).collect {
+        pokemonDao.saveAll(listOf(productEntity))
+        pokemonDao.getAll().take(1).collect {
             assertEquals(productEntity.id, it[0].id)
         }
     }

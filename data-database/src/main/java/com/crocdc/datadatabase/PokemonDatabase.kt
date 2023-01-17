@@ -11,7 +11,7 @@ import com.crocdc.datadatabase.model.PokemonEntity
 )
 
 abstract class PokemonDatabase : RoomDatabase() {
-    abstract fun productDao(): PokemonDao
+    abstract fun pokemonDao(): PokemonDao
 
     companion object {
         const val DATABASE_NAME: String = "pokemon_database"
