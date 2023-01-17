@@ -2,6 +2,7 @@ package com.crocdc.datanetworking.datasource
 
 import com.crocdc.datanetworking.BuildConfig
 import com.crocdc.datanetworking.Resource
+import com.crocdc.datanetworking.model.PokemonListing
 import com.crocdc.datanetworking.model.PokemonsResponse
 import com.squareup.moshi.Moshi
 import okhttp3.HttpUrl
