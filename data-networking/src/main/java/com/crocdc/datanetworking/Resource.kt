@@ -12,4 +12,3 @@ data class Resource<T>(val data: T?, val status: StatusResponse) {
 enum class StatusResponse {
     SUCCESS, LOADING, ERROR
 }
-
