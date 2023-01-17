@@ -16,3 +16,4 @@ rootProject.name = "Solid Waffle"
 include ':app'
 include ':data-networking'
 include ':data-database'
+include ':data-core'
