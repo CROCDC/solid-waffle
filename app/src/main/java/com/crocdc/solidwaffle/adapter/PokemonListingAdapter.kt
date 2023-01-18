@@ -2,12 +2,14 @@ package com.crocdc.solidwaffle.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.crocdc.datacore.model.Pokemon
 import com.crocdc.solidwaffle.databinding.ListItemPokemonBinding
-import com.squareup.picasso.Picasso
+import com.crocdc.solidwaffle.fetchImage
+import com.crocdc.solidwaffle.fragments.PokemonListingFragmentDirections
 
 class PokemonListingAdapter :
     ListAdapter<Pokemon, PokemonListingAdapter.PokemonViewHolder>(DiffCallback) {
@@ -31,9 +33,14 @@ class PokemonListingAdapter :
 
         fun bind(pokemon: Pokemon) {
             binding.txt.text = pokemon.name
-            Picasso.get()
-                .load(pokemon.image)
-                .into(binding.img)
+            binding.img.fetchImage(pokemon.image)
+            binding.root.setOnClickListener {
+                it.findNavController().navigate(
+                    PokemonListingFragmentDirections.actionPokemonListingFragmentToPokemonInfoFragment(
+                        pokemon.name
+                    )
+                )
+            }
         }
     }
 

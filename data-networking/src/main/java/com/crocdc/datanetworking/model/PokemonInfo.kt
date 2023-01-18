@@ -10,5 +10,6 @@ data class PokemonInfo(
     val abilities: List<Abilities>,
     @Json(name = "location_area_encounters")
     val locationAreaEncounters: String,
-    val name: String
+    val name: String,
+    val sprites: Sprites
 )

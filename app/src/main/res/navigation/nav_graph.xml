@@ -8,5 +8,17 @@
     <fragment
         android:id="@+id/pokemonListingFragment"
         android:name="com.crocdc.solidwaffle.fragments.PokemonListingFragment"
-        tools:layout="@layout/fragment_pokemon_listing" />
+        tools:layout="@layout/fragment_pokemon_listing" >
+        <action
+            android:id="@+id/action_pokemonListingFragment_to_pokemonInfoFragment"
+            app:destination="@id/pokemonInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonInfoFragment"
+        android:name="com.crocdc.solidwaffle.fragments.PokemonInfoFragment"
+        android:label="PokemonInfoFragment" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
 </navigation>

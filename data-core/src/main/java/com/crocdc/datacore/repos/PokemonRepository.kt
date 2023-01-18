@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
     private val pokemonDao: PokemonDao,
-    private val pokemonInfoDao: PokemonInfoDao
+    private val pokemonInfoDao: PokemonInfoDao,
     private val dataSource: PokemonDataSourceProvider
 ) {
 
@@ -55,17 +55,20 @@ class PokemonRepository @Inject constructor(
         shouldFetch = { it.isEmpty() }
     )
 
-    fun getPokemonInfo(name: String) = networkBoundResource(
+    fun getPokemonInfo(name: String): Flow<PokemonInfo?> = networkBoundResource(
         query = {
             // TODO improve packages
             pokemonInfoDao.getPokemonInfoEntity(name).map {
-                PokemonInfo(
-                    it.name,
-                    it.types.map { com.crocdc.datacore.model.Type(it.name) },
-                    it.moves.map { com.crocdc.datacore.model.Move(it.name) },
-                    it.abilities.map { com.crocdc.datacore.model.Ability(it.name) },
-                    it.locationAreaEncounters
-                )
+                it?.let {
+                    PokemonInfo(
+                        it.name,
+                        it.image,
+                        it.types.map { com.crocdc.datacore.model.Type(it.name) },
+                        it.moves.map { com.crocdc.datacore.model.Move(it.name) },
+                        it.abilities.map { com.crocdc.datacore.model.Ability(it.name) },
+                        it.locationAreaEncounters
+                    )
+                }
             }
         },
         fetch = {
@@ -79,7 +82,8 @@ class PokemonRepository @Inject constructor(
                         it.types.map { Type(it.type.name) },
                         it.moves.map { Move(it.move.name) },
                         it.abilities.map { Ability(it.ability.name) },
-                        it.locationAreaEncounters
+                        it.locationAreaEncounters,
+                        it.sprites.other.officialArtwork.frontDefault
                     )
                 )
             }
