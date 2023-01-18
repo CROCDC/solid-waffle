@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.crocdc.solidwaffle.R
+import com.crocdc.solidwaffle.adapter.TypeAdapter
 import com.crocdc.solidwaffle.databinding.FragmentPokemonInfoBinding
 import com.crocdc.solidwaffle.fetchImage
 import com.crocdc.solidwaffle.util.viewDataBinding
@@ -25,9 +26,13 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val adapter = TypeAdapter()
+        binding.recyclerTypes.adapter = adapter
+        binding.txtName.text = args.name
         lifecycleScope.launch {
             viewModel.setName(args.name)
             viewModel.pokemonInfo.collect {
+                adapter.submitList(it?.types)
                 it?.let {
                     binding.img.fetchImage(it.image)
                 }

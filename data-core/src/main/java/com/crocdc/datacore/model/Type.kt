@@ -1,3 +1,20 @@
 package com.crocdc.datacore.model
 
-data class Type(val name: String)
+enum class Type {
+    FIRE,
+    WATER,
+    DARK,
+    DRAGON,
+    POISON,
+    ELECTRIC,
+    GHOST,
+    FLYING,
+    FAIRY,
+    PSYCHIC,
+    NORMAL,
+    ROCK,
+    GRASS,
+    ICE,
+    GROUND,
+    STEEL
+}
