@@ -2,9 +2,13 @@ package com.crocdc.datadatabase
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import com.crocdc.datadatabase.dao.PokemonDao
+import com.crocdc.datadatabase.dao.PokemonInfoDao
+import com.crocdc.datadatabase.model.Ability
+import com.crocdc.datadatabase.model.Move
 import com.crocdc.datadatabase.model.PokemonEntity
-import junit.framework.TestCase.assertEquals
+import com.crocdc.datadatabase.model.PokemonInfoEntity
+import com.crocdc.datadatabase.model.Type
+import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.runTest
@@ -16,9 +20,9 @@ import org.robolectric.RobolectricTestRunner
 import java.io.IOException
 
 @RunWith(RobolectricTestRunner::class)
-class PokemonDaoTest {
+class PokemonInfoDaoTest {
 
-    private lateinit var dao: PokemonDao
+    private lateinit var dao: PokemonInfoDao
     private lateinit var db: PokemonDatabase
 
     @Before
@@ -27,7 +31,7 @@ class PokemonDaoTest {
         db = Room.inMemoryDatabaseBuilder(
             context, PokemonDatabase::class.java
         ).allowMainThreadQueries().build()
-        dao = db.pokemonDao()
+        dao = db.pokemonInfoDao()
     }
 
     @After
@@ -39,11 +43,24 @@ class PokemonDaoTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     @Throws(Exception::class)
-    fun saveAndSearch() = runTest {
-        val productEntity = PokemonEntity("7", "Squirtle")
-        dao.saveAll(listOf(productEntity))
-        dao.search("S").take(1).collect {
-            assertEquals(productEntity.id, it[0].id)
+    fun saveAndGet() = runTest {
+        val productEntity = PokemonEntity(id, "Squirtle")
+        dao.save(
+            PokemonInfoEntity(
+                id,
+                "Squirtle",
+                listOf(Type("water")),
+                listOf(Move("tackle")),
+                listOf(Ability("blaze")),
+                "river"
+            )
+        )
+        dao.getPokemonInfoEntity(id).take(1).collect {
+            TestCase.assertEquals(productEntity.id, it.id)
         }
+    }
+
+    companion object {
+        private const val id = "4"
     }
 }

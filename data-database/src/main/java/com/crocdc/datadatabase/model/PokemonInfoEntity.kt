@@ -1,0 +1,14 @@
+package com.crocdc.datadatabase.model
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class PokemonInfoEntity(
+    @PrimaryKey val id: String,
+    val name: String,
+    val types: List<Type>,
+    val moves: List<Move>,
+    val abilities: List<Ability>,
+    val locationAreaEncounters: String,
+)

@@ -20,6 +20,7 @@ import android.content.Context
 import androidx.room.Room
 import com.crocdc.datadatabase.PokemonDatabase
 import com.crocdc.datadatabase.dao.PokemonDao
+import com.crocdc.datadatabase.dao.PokemonInfoDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,17 +32,18 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
-    fun providePokemonDao(appDatabase: PokemonDatabase): PokemonDao {
-        return appDatabase.pokemonDao()
-    }
+    fun providePokemonDao(appDatabase: PokemonDatabase): PokemonDao = appDatabase.pokemonDao()
+
+    @Provides
+    fun providePokemonInfoDao(appDatabase: PokemonDatabase): PokemonInfoDao =
+        appDatabase.pokemonInfoDao()
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): PokemonDatabase {
-        return Room.databaseBuilder(
+    fun provideAppDatabase(@ApplicationContext appContext: Context): PokemonDatabase =
+        Room.databaseBuilder(
             appContext,
             PokemonDatabase::class.java,
             PokemonDatabase.DATABASE_NAME
         ).build()
-    }
 }
