@@ -1,25 +1,32 @@
 package com.crocdc.datacore.repos
 
 import com.crocdc.datacore.model.Pokemon
+import com.crocdc.datacore.model.PokemonInfo
 import com.crocdc.datacore.networkBoundResource
 import com.crocdc.datadatabase.dao.PokemonDao
+import com.crocdc.datadatabase.dao.PokemonInfoDao
+import com.crocdc.datadatabase.model.Ability
+import com.crocdc.datadatabase.model.Move
 import com.crocdc.datadatabase.model.PokemonEntity
+import com.crocdc.datadatabase.model.PokemonInfoEntity
+import com.crocdc.datadatabase.model.Type
 import com.crocdc.datanetworking.datasource.PokemonDataSourceProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
-    private val dao: PokemonDao,
+    private val pokemonDao: PokemonDao,
+    private val pokemonInfoDao: PokemonInfoDao
     private val dataSource: PokemonDataSourceProvider
 ) {
 
     fun getPokemonsListing(query: String?): Flow<List<Pokemon>> = networkBoundResource(
         query = {
             if (query == null) {
-                dao.getAll()
+                pokemonDao.getAll()
             } else {
-                dao.search(query)
+                pokemonDao.search(query)
             }.map { pokemonEntities ->
                 pokemonEntities.map {
                     // todo improve image get
@@ -35,7 +42,7 @@ class PokemonRepository @Inject constructor(
         },
         saveFetchResult = { r ->
             //todo improve id
-            dao.saveAll(
+            pokemonDao.saveAll(
                 r.data?.results?.map { listing ->
                     val split = listing.url.split("/")
                     PokemonEntity(
@@ -46,5 +53,36 @@ class PokemonRepository @Inject constructor(
             )
         },
         shouldFetch = { it.isEmpty() }
+    )
+
+    fun getPokemonInfo(name: String) = networkBoundResource(
+        query = {
+            // TODO improve packages
+            pokemonInfoDao.getPokemonInfoEntity(name).map {
+                PokemonInfo(
+                    it.name,
+                    it.types.map { com.crocdc.datacore.model.Type(it.name) },
+                    it.moves.map { com.crocdc.datacore.model.Move(it.name) },
+                    it.abilities.map { com.crocdc.datacore.model.Ability(it.name) },
+                    it.locationAreaEncounters
+                )
+            }
+        },
+        fetch = {
+            dataSource.getPokemonInfo(name)
+        },
+        saveFetchResult = { r ->
+            r.data?.let {
+                pokemonInfoDao.save(
+                    PokemonInfoEntity(
+                        it.name,
+                        it.types.map { Type(it.type.name) },
+                        it.moves.map { Move(it.move.name) },
+                        it.abilities.map { Ability(it.ability.name) },
+                        it.locationAreaEncounters
+                    )
+                )
+            }
+        }
     )
 }

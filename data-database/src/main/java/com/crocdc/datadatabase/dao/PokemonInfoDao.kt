@@ -13,6 +13,6 @@ interface PokemonInfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(pokemonInfoEntity: PokemonInfoEntity)
 
-    @Query("SELECT * FROM PokemonInfoEntity WHERE id == :id")
-    fun getPokemonInfoEntity(id: String): Flow<PokemonInfoEntity>
+    @Query("SELECT * FROM PokemonInfoEntity WHERE name == :name")
+    fun getPokemonInfoEntity(name: String): Flow<PokemonInfoEntity?>
 }

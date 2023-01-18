@@ -44,23 +44,22 @@ class PokemonInfoDaoTest {
     @Test
     @Throws(Exception::class)
     fun saveAndGet() = runTest {
-        val productEntity = PokemonEntity(id, "Squirtle")
+        val productEntity = PokemonEntity(name)
         dao.save(
             PokemonInfoEntity(
-                id,
-                "Squirtle",
+                name,
                 listOf(Type("water")),
                 listOf(Move("tackle")),
                 listOf(Ability("blaze")),
                 "river"
             )
         )
-        dao.getPokemonInfoEntity(id).take(1).collect {
-            TestCase.assertEquals(productEntity.id, it.id)
+        dao.getPokemonInfoEntity(name).take(1).collect {
+            TestCase.assertEquals(productEntity.id, name)
         }
     }
 
     companion object {
-        private const val id = "4"
+        private const val name = "Squirtle"
     }
 }

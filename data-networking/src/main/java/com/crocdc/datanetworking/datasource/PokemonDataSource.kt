@@ -33,8 +33,8 @@ class PokemonDataSource @Inject constructor(
         }
     }
 
-    override fun getPokemonInfo(id: String): Resource<PokemonInfo> {
-        request.addPathSegment(id)
+    override fun getPokemonInfo(name: String): Resource<PokemonInfo> {
+        request.addPathSegment(name)
 
         val response =
             okHttpClient.newCall(Request.Builder().url(request.build()).build()).execute()

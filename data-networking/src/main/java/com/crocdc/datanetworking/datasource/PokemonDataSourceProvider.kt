@@ -6,5 +6,5 @@ import com.crocdc.datanetworking.model.PokemonsResponse
 
 interface PokemonDataSourceProvider {
     fun getPokemonsListing(): Resource<PokemonsResponse>
-    fun getPokemonInfo(id: String): Resource<PokemonInfo>
+    fun getPokemonInfo(name: String): Resource<PokemonInfo>
 }
