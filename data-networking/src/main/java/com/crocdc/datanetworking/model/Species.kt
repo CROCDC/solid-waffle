@@ -1,3 +1,3 @@
 package com.crocdc.datanetworking.model
 
-data class Moves(val move: Move)
+data class Species(val name: String)

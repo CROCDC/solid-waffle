@@ -24,11 +24,4 @@ class PokemonDataSourceTest {
     fun getPokemonInfo() {
         dataSource.getPokemonInfo("7").assert()
     }
-
-    private fun <T> Resource<T>.assert() {
-        if (status != StatusResponse.LOADING) {
-            assertEquals(StatusResponse.SUCCESS, status)
-            println(data)
-        }
-    }
 }
