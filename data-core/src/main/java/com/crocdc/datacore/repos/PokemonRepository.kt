@@ -63,8 +63,12 @@ class PokemonRepository @Inject constructor(
                     PokemonInfo(
                         it.name,
                         it.image,
-                        it.types.map {
-                            com.crocdc.datacore.model.Type.valueOf(it.name.uppercase())
+                        it.types.mapNotNull {
+                            try {
+                                com.crocdc.datacore.model.Type.valueOf(it.name.uppercase())
+                            }catch (e:java.lang.Exception){
+                                null
+                            }
                         },
                         it.moves.map { com.crocdc.datacore.model.Move(it.name) },
                         it.abilities.map { com.crocdc.datacore.model.Ability(it.name) },

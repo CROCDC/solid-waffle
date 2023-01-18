@@ -16,5 +16,6 @@ enum class Type {
     GRASS,
     ICE,
     GROUND,
-    STEEL
+    STEEL,
+    BUG
 }

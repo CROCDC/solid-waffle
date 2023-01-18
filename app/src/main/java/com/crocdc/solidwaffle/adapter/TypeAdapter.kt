@@ -50,6 +50,7 @@ class TypeAdapter : ListAdapter<Type, TypeAdapter.ViewHolder>(DiffUtilCallback) 
                 Type.ICE -> R.drawable.ic_ice to R.color.ice
                 Type.GROUND -> R.drawable.ic_ground to R.color.ground
                 Type.STEEL -> R.drawable.ic_steel to R.color.steel
+                Type.BUG -> R.drawable.ic_bug to R.color.bug
             }.run {
                 changeImgAndBackground(first, second)
             }
