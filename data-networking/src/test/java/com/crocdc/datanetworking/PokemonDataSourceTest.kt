@@ -3,8 +3,6 @@ package com.crocdc.datanetworking
 import com.crocdc.datanetworking.datasource.PokemonDataSource
 import com.crocdc.datanetworking.datasource.PokemonDataSourceProvider
 import com.crocdc.datanetworking.di.NetworkModule
-import com.squareup.moshi.Moshi
-import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -17,7 +15,14 @@ class PokemonDataSourceTest {
 
     @Test
     fun getPokemonsListing() {
-        dataSource.getPokemonsListing().assert()
+        val resource = dataSource.getPokemonsListing()
+        resource.assert()
+        assertEquals(151, resource.data?.results?.size)
+    }
+
+    @Test
+    fun getPokemonInfo() {
+        dataSource.getPokemonInfo("7").assert()
     }
 
     private fun <T> Resource<T>.assert() {
