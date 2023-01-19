@@ -2,12 +2,11 @@ package com.crocdc.datadatabase
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import com.crocdc.datadatabase.dao.PokemonInfoDao
-import com.crocdc.datadatabase.model.Ability
-import com.crocdc.datadatabase.model.Move
-import com.crocdc.datadatabase.model.PokemonEntity
-import com.crocdc.datadatabase.model.PokemonInfoEntity
-import com.crocdc.datadatabase.model.Type
+import com.crocdc.datadatabase.dao.EvolutionDao
+import com.crocdc.datadatabase.model.EvolutionEntity
+import com.crocdc.datadatabase.model.EvolvesTo
+import com.crocdc.datadatabase.model.EvolvesTo2
+import com.crocdc.datadatabase.model.PokemonEvolution
 import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
@@ -20,18 +19,19 @@ import org.robolectric.RobolectricTestRunner
 import java.io.IOException
 
 @RunWith(RobolectricTestRunner::class)
-class PokemonInfoDaoTest {
+class EvolutionDaoTest {
 
-    private lateinit var dao: PokemonInfoDao
+    private lateinit var dao: EvolutionDao
     private lateinit var db: PokemonDatabase
 
+    // TODO stop repeating code
     @Before
     fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().context
         db = Room.inMemoryDatabaseBuilder(
             context, PokemonDatabase::class.java
         ).allowMainThreadQueries().build()
-        dao = db.pokemonInfoDao()
+        dao = db.evolutionDao()
     }
 
     @After
@@ -44,23 +44,28 @@ class PokemonInfoDaoTest {
     @Test
     @Throws(Exception::class)
     fun saveAndGet() = runTest {
-        val productEntity = PokemonEntity(name, "")
-        dao.save(
-            PokemonInfoEntity(
-                name,
-                listOf(Type("water")),
-                listOf(Move("tackle")),
-                listOf(Ability("blaze")),
-                "river",
-                "image"
+        val evolutionEntity = EvolutionEntity(
+            NAME,
+            EvolvesTo(
+                16,
+                PokemonEvolution("wartortle", "image"),
+                EvolvesTo2(
+                    36,
+                    PokemonEvolution(
+                        "blastoise",
+                        "image"
+                    )
+                )
             )
+
         )
-        dao.getPokemonInfoEntity(name).take(1).collect {
-            TestCase.assertEquals(productEntity.id, name)
+        dao.save(evolutionEntity)
+        dao.getEvolutionEntity(NAME).take(1).collect {
+            TestCase.assertEquals(NAME, it?.name)
         }
     }
 
     companion object {
-        private const val name = "Squirtle"
+        private const val NAME = "Squirtle"
     }
 }
