@@ -5,4 +5,7 @@
     <string name="moves">Moves</string>
     <string name="is_hidden">Is Hidden:</string>
     <string name="abilities">Abilities</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="areas">Areas</string>
 </resources>

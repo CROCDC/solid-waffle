@@ -1,3 +1,3 @@
 package com.crocdc.domain.model
 
-data class Area(val area: String)
+data class Area(val name: String)
