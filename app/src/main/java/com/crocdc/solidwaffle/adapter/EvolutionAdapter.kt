@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.crocdc.domain.model.FromEvolutionTo
+import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.databinding.ListItemEvolutionBinding
 import com.crocdc.solidwaffle.fetchImage
 
@@ -30,7 +31,12 @@ class EvolutionAdapter : ListAdapter<FromEvolutionTo, EvolutionAdapter.ViewHolde
         fun bind(fromEvolutionTo: FromEvolutionTo) {
             binding.imgFrom.fetchImage(fromEvolutionTo.from.image)
             binding.imgTo.fetchImage(fromEvolutionTo.to.image)
-            binding.txtMinLevel.text = fromEvolutionTo.minLevel.toString()
+            binding.txtMinLevel.text = itemView.context.getString(
+                R.string.min_level,
+                fromEvolutionTo.minLevel
+            )
+            binding.txtFrom.text = fromEvolutionTo.from.name
+            binding.txtTo.text = fromEvolutionTo.to.name
         }
     }
 

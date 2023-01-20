@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Solid Waffle</string>
+    <string name="min_level">Lv. %1$d</string>
+    <string name="evolutions">Evolutions</string>
 </resources>

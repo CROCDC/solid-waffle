@@ -1,7 +1,6 @@
 package com.crocdc.solidwaffle.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,6 +13,7 @@ import com.crocdc.solidwaffle.databinding.FragmentPokemonInfoBinding
 import com.crocdc.solidwaffle.fetchImage
 import com.crocdc.solidwaffle.util.viewDataBinding
 import com.crocdc.solidwaffle.vm.PokemonInfoViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,10 +39,15 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                     binding.img.fetchImage(it.image)
                 }
             }
-            viewModel.pokemonSpecie.collect {
-                it
-            }
         }
         binding.viewPager.adapter = PokemonInfoAdapter(this)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            when (position) {
+                0 -> R.string.evolutions
+                else -> null
+            }?.let {
+                tab.setText(it)
+            }
+        }.attach()
     }
 }

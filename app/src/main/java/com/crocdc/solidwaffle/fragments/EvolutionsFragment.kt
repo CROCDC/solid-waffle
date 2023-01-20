@@ -29,9 +29,6 @@ class EvolutionsFragment : Fragment(R.layout.fragment_evolutions) {
             viewModel.evolutions.collect {
                 adapter.submitList(it)
             }
-            viewModel.pokemonSpecie.collect {
-                it
-            }
         }
     }
 }

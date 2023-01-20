@@ -19,8 +19,6 @@ class EvolutionsRepository @Inject constructor(
         query = { dao.getEvolutionEntity(evolutionChain) },
         fetch = { dataSource.getEvolutions(evolutionChain) },
         saveFetchResult = {
-            Log.e("CROCDC saveFetchResult", evolutionChain.toString())
-            Log.e("CROCDC saveFetchResult", it.toString())
             it.data?.let {
                 val evolvesTo = it.chain.evolvesTo[0]
                 val evolvesTo2 = it.chain.evolvesTo[0].evolvesTo?.get(0)

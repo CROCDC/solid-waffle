@@ -1,6 +1,5 @@
 package com.crocdc.usecase
 
-import android.util.Log
 import com.crocdc.datacore.repos.EvolutionsRepository
 import com.crocdc.datacore.repos.PokemonRepository
 import com.crocdc.datacore.repos.PokemonSpecieRepository
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -37,7 +35,7 @@ class PokemonInfoUseCaseImp @Inject constructor(
             }
         } ?: emptyFlow()
     }
-    override val pokemonSpecie: Flow<PokemonSpecie?> = name.flatMapConcat { name ->
+    override val pokemonSpecie: Flow<PokemonSpecie?> = name.flatMapLatest { name ->
         name?.let {
             specieRepository.getPokemonSpecie(name).map {
                 it?.let { PokemonSpecieMapper.transform(it) }
@@ -45,8 +43,7 @@ class PokemonInfoUseCaseImp @Inject constructor(
         } ?: emptyFlow()
     }
 
-    override val evolutionEntity: Flow<EvolutionEntity?> = pokemonSpecie.flatMapConcat { specie ->
-        Log.e("CROCDC", specie.toString())
+    override val evolutionEntity: Flow<EvolutionEntity?> = pokemonSpecie.flatMapLatest { specie ->
         specie?.let {
             evolutionsRepository.getEvolutions(specie.evolutionChain)
         } ?: emptyFlow()
@@ -75,7 +72,6 @@ class PokemonInfoUseCaseImp @Inject constructor(
                         Pokemon(
                             info.name,
                             info.sprite
-
                         ),
                         entity.evolvesTo.minLevel,
                         Pokemon(
