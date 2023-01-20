@@ -19,7 +19,7 @@ class PokemonSpeciesDataSource @Inject constructor(
         .addPathSegment("v2")
         .addPathSegment("pokemon-species")
 
-    fun getPokemonSpecies(name: String): Resource<PokemonsSpeciesResponse> {
+    override fun getPokemonSpecies(name: String): Resource<PokemonsSpeciesResponse> {
         request.addPathSegment(name)
 
         val response =

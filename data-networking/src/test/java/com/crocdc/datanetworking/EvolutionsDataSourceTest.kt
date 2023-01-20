@@ -12,7 +12,7 @@ class EvolutionsDataSourceTest {
     )
 
     @Test
-    fun getPokemonsListing() {
+    fun getEvolutions() {
         dataSource.getEvolutions("1").assert()
     }
 }

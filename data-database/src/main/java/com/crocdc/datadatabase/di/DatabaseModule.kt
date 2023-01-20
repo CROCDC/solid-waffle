@@ -21,6 +21,7 @@ import androidx.room.Room
 import com.crocdc.datadatabase.PokemonDatabase
 import com.crocdc.datadatabase.dao.PokemonDao
 import com.crocdc.datadatabase.dao.PokemonInfoDao
+import com.crocdc.datadatabase.dao.PokemonSpecieDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,6 +38,10 @@ object DatabaseModule {
     @Provides
     fun providePokemonInfoDao(appDatabase: PokemonDatabase): PokemonInfoDao =
         appDatabase.pokemonInfoDao()
+
+    @Provides
+    fun providePokemonSpecieDao(appDatabase: PokemonDatabase): PokemonSpecieDao =
+        appDatabase.pokemonSpecieDao()
 
     @Provides
     @Singleton
