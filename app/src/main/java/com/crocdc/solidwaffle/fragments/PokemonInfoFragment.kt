@@ -44,6 +44,7 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> R.string.evolutions
+                1 -> R.string.moves
                 else -> null
             }?.let {
                 tab.setText(it)
