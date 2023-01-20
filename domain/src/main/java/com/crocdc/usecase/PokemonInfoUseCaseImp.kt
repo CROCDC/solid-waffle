@@ -1,12 +1,15 @@
 package com.crocdc.usecase
 
+import com.crocdc.datacore.repos.EncountersRepository
 import com.crocdc.datacore.repos.EvolutionsRepository
 import com.crocdc.datacore.repos.PokemonRepository
 import com.crocdc.datacore.repos.PokemonSpecieRepository
+import com.crocdc.domain.model.Area
 import com.crocdc.domain.model.FromEvolutionTo
 import com.crocdc.domain.model.Pokemon
 import com.crocdc.domain.model.PokemonInfo
 import com.crocdc.domain.model.PokemonSpecie
+import com.crocdc.mapper.AreaMapper
 import com.crocdc.mapper.PokemonInfoMapper
 import com.crocdc.mapper.PokemonSpecieMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,7 +25,8 @@ import javax.inject.Inject
 class PokemonInfoUseCaseImp @Inject constructor(
     pokemonRepository: PokemonRepository,
     specieRepository: PokemonSpecieRepository,
-    evolutionsRepository: EvolutionsRepository
+    evolutionsRepository: EvolutionsRepository,
+    encountersRepository: EncountersRepository
 ) : PokemonInfoUseCase {
 
     private val name: MutableStateFlow<String?> = MutableStateFlow(null)
@@ -74,6 +78,13 @@ class PokemonInfoUseCaseImp @Inject constructor(
                         )
                     ).plus(second).filterNotNull()
                 } ?: emptyList()
+            }
+        } ?: emptyFlow()
+    }
+    override val areas: Flow<List<Area>> = name.flatMapLatest {
+        it?.let {
+            encountersRepository.getEncounters(it).map {
+                it?.let { AreaMapper.transform(it) } ?: emptyList()
             }
         } ?: emptyFlow()
     }

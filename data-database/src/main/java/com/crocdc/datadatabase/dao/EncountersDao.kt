@@ -13,5 +13,5 @@ interface EncountersDao {
     fun save(encountersEntity: EncountersEntity)
 
     @Query("SELECT * FROM EncountersEntity WHERE name  == :name")
-    fun getEvolutionEntity(name: String): Flow<EncountersEntity?>
+    fun getEncountersEntity(name: String): Flow<EncountersEntity?>
 }

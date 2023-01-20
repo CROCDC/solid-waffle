@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 @Entity
 data class EncountersEntity(
     @PrimaryKey val name: String,
-    val areaName: String
+    val encounters: List<Encounter>
 )

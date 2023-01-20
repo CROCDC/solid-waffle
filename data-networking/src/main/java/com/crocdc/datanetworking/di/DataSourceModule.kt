@@ -1,5 +1,7 @@
 package com.crocdc.datanetworking.di
 
+import com.crocdc.datanetworking.datasource.EncountersDataSource
+import com.crocdc.datanetworking.datasource.EncountersDataSourceProvider
 import com.crocdc.datanetworking.datasource.EvolutionsDataSource
 import com.crocdc.datanetworking.datasource.EvolutionsDataSourceProvider
 import com.crocdc.datanetworking.datasource.PokemonDataSource
@@ -29,4 +31,9 @@ abstract class DataSourceModule {
     abstract fun bindEvolutionsDataSource(
         dataSource: EvolutionsDataSource
     ): EvolutionsDataSourceProvider
+
+    @Binds
+    abstract fun bindEncountersDataSource(
+        dataSource: EncountersDataSource
+    ): EncountersDataSourceProvider
 }
