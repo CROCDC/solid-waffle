@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    namespace 'com.crocdc.datacore'
-    compileSdk rootProject.ext.compileSdkVersion
+    namespace 'com.crocdc.domain'
+    compileSdk 32
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdk 21
+        targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -32,17 +32,10 @@ android {
 }
 
 dependencies {
-    // TODO investigar esto
-    api project(':data-database')
-    implementation project(':data-networking')
+    implementation project(':data-core')
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
-
-    testImplementation 'junit:junit:4.13.2'
-    testImplementation "io.mockk:mockk-android:1.13.3"
-    testImplementation "io.mockk:mockk-agent:1.13.3"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
 }
