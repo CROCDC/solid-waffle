@@ -20,7 +20,7 @@ class EvolutionsRepository @Inject constructor(
         saveFetchResult = {
             it.data?.let {
                 val evolvesTo = it.chain.evolvesTo[0]
-                val evolvesTo2 = it.chain.evolvesTo[0].evolvesTo?.get(0)
+                val evolvesTo2 = it.chain.evolvesTo[0].evolvesTo?.getOrNull(0)
                 dao.save(
                     EvolutionEntity(
                         evolutionChain,

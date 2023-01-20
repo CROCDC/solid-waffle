@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -43,7 +44,7 @@ class PokemonInfoUseCaseImp @Inject constructor(
 
     override val evolutions: Flow<List<FromEvolutionTo>> = pokemonSpecie.flatMapLatest { specie ->
         specie?.let {
-            evolutionsRepository.getEvolutions(specie.evolutionChain).map {
+            evolutionsRepository.getEvolutions(specie.evolutionChain).mapLatest {
                 it?.let { entity ->
                     val second = it.evolvesTo.evolvesTo?.let {
                         FromEvolutionTo(
