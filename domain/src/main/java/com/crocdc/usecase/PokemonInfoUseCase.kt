@@ -1,6 +1,5 @@
 package com.crocdc.usecase
 
-import com.crocdc.datadatabase.model.EvolutionEntity
 import com.crocdc.domain.model.FromEvolutionTo
 import com.crocdc.domain.model.PokemonInfo
 import com.crocdc.domain.model.PokemonSpecie
@@ -11,5 +10,4 @@ interface PokemonInfoUseCase {
     val pokemonSpecie: Flow<PokemonSpecie?>
     val evolutions: Flow<List<FromEvolutionTo>>
     suspend fun setName(name: String)
-    val evolutionEntity: Flow<EvolutionEntity?>
 }

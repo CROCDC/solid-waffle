@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 @Entity
 data class EvolutionEntity(
     @PrimaryKey val chain: String,
+    @Embedded val basePokemon: PokemonEvolution,
     @Embedded val evolvesTo: EvolvesTo
 )

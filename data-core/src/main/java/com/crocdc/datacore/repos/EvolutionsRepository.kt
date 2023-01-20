@@ -1,6 +1,5 @@
 package com.crocdc.datacore.repos
 
-import android.util.Log
 import com.crocdc.datacore.networkBoundResource
 import com.crocdc.datadatabase.dao.EvolutionDao
 import com.crocdc.datadatabase.model.EvolutionEntity
@@ -25,6 +24,7 @@ class EvolutionsRepository @Inject constructor(
                 dao.save(
                     EvolutionEntity(
                         evolutionChain,
+                        PokemonEvolution(it.chain.species.name, it.chain.species.urlToId()),
                         EvolvesTo(
                             evolvesTo.evolutionDetails[0].minLevel,
                             PokemonEvolution(
