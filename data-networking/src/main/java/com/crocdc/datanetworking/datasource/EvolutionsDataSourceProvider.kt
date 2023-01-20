@@ -4,5 +4,5 @@ import com.crocdc.datanetworking.Resource
 import com.crocdc.datanetworking.model.EvolutionResponse
 
 interface EvolutionsDataSourceProvider {
-    fun getEvolutions(name: String): Resource<EvolutionResponse>
+    fun getEvolutions(evolutionChain: String): Resource<EvolutionResponse>
 }

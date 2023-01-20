@@ -12,7 +12,6 @@ import javax.inject.Inject
 class EvolutionsDataSource @Inject constructor(
     private val okHttpClient: OkHttpClient,
     private val moshi: Moshi,
-    private val pokemonSpeciesDataSource: PokemonSpeciesDataSource
 ) : EvolutionsDataSourceProvider {
 
     private val request: HttpUrl.Builder = HttpUrl.Builder()
@@ -21,11 +20,8 @@ class EvolutionsDataSource @Inject constructor(
         .addPathSegment("v2")
         .addPathSegment("evolution-chain")
 
-    override fun getEvolutions(name: String): Resource<EvolutionResponse> {
-        // TODO IMPROVE
-        val evolutionChain =
-            pokemonSpeciesDataSource.getPokemonSpecies(name).data?.evolutionChain?.url?.split("/")
-        request.addPathSegment(evolutionChain?.get(evolutionChain.size - 2) ?: "")
+    override fun getEvolutions(evolutionChain: String): Resource<EvolutionResponse> {
+        request.addPathSegment(evolutionChain)
 
         val response =
             okHttpClient.newCall(Request.Builder().url(request.build()).build()).execute()
