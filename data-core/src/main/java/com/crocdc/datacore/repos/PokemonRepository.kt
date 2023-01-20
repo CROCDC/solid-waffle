@@ -4,6 +4,7 @@ import com.crocdc.datacore.networkBoundResource
 import com.crocdc.datadatabase.dao.PokemonDao
 import com.crocdc.datadatabase.dao.PokemonInfoDao
 import com.crocdc.datadatabase.model.Ability
+import com.crocdc.datadatabase.model.LearnedAt
 import com.crocdc.datadatabase.model.Move
 import com.crocdc.datadatabase.model.PokemonEntity
 import com.crocdc.datadatabase.model.PokemonInfoEntity
@@ -55,7 +56,17 @@ class PokemonRepository @Inject constructor(
                     PokemonInfoEntity(
                         it.name,
                         it.types.map { Type(it.type.name) },
-                        it.moves.map { Move(it.move.name) },
+                        it.moves.map {
+                            Move(
+                                it.move.name,
+                                it.versionGroupDetails.map {
+                                    LearnedAt(
+                                        it.levelLearnedAt,
+                                        it.moveLearnMethod.name
+                                    )
+                                }
+                            )
+                        },
                         it.abilities.map { Ability(it.ability.name) },
                         it.locationAreaEncounters,
                         it.sprites.other.officialArtwork.frontDefault,
