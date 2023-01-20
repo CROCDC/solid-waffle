@@ -45,6 +45,7 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
             when (position) {
                 0 -> R.string.evolutions
                 1 -> R.string.moves
+                2 -> R.string.abilities
                 else -> null
             }?.let {
                 tab.setText(it)

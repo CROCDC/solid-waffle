@@ -24,7 +24,7 @@ object PokemonInfoMapper : BaseMapper<PokemonInfoEntity, PokemonInfo>() {
                     }
                 )
             },
-            inputModel.abilities.map { Ability(it.name) },
+            inputModel.abilities.map { Ability(it.name, it.isHidden) },
             inputModel.locationAreaEncounters,
             inputModel.sprite
         )

@@ -3,4 +3,6 @@
     <string name="min_level">Lv. %1$d</string>
     <string name="evolutions">Evolutions</string>
     <string name="moves">Moves</string>
+    <string name="is_hidden">Is Hidden:</string>
+    <string name="abilities">Abilities</string>
 </resources>
