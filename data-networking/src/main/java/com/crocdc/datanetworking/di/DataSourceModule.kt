@@ -1,7 +1,11 @@
 package com.crocdc.datanetworking.di
 
+import com.crocdc.datanetworking.datasource.EvolutionsDataSource
+import com.crocdc.datanetworking.datasource.EvolutionsDataSourceProvider
 import com.crocdc.datanetworking.datasource.PokemonDataSource
 import com.crocdc.datanetworking.datasource.PokemonDataSourceProvider
+import com.crocdc.datanetworking.datasource.PokemonSpeciesDataSource
+import com.crocdc.datanetworking.datasource.PokemonSpeciesDataSourceProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,4 +19,14 @@ abstract class DataSourceModule {
     abstract fun bindPokemonDataSource(
         dataSource: PokemonDataSource
     ): PokemonDataSourceProvider
+
+    @Binds
+    abstract fun bindPokemonSpeciesDataSource(
+        dataSource: PokemonSpeciesDataSource
+    ): PokemonSpeciesDataSourceProvider
+
+    @Binds
+    abstract fun bindEvolutionsDataSource(
+        dataSource: EvolutionsDataSource
+    ): EvolutionsDataSourceProvider
 }

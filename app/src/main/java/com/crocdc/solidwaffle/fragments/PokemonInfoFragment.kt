@@ -1,12 +1,14 @@
 package com.crocdc.solidwaffle.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.crocdc.solidwaffle.R
+import com.crocdc.solidwaffle.adapter.PokemonInfoAdapter
 import com.crocdc.solidwaffle.adapter.TypeAdapter
 import com.crocdc.solidwaffle.databinding.FragmentPokemonInfoBinding
 import com.crocdc.solidwaffle.fetchImage
@@ -37,6 +39,10 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                     binding.img.fetchImage(it.image)
                 }
             }
+            viewModel.pokemonSpecie.collect {
+                it
+            }
         }
+        binding.viewPager.adapter = PokemonInfoAdapter(this)
     }
 }

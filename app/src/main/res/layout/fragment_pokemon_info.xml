@@ -40,6 +40,12 @@
             tools:itemCount="2"
             tools:listitem="@layout/list_item_type" />
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/recycler_types" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

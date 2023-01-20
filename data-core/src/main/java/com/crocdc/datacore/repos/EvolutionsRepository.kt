@@ -1,5 +1,6 @@
 package com.crocdc.datacore.repos
 
+import android.util.Log
 import com.crocdc.datacore.networkBoundResource
 import com.crocdc.datadatabase.dao.EvolutionDao
 import com.crocdc.datadatabase.model.EvolutionEntity
@@ -18,9 +19,11 @@ class EvolutionsRepository @Inject constructor(
         query = { dao.getEvolutionEntity(evolutionChain) },
         fetch = { dataSource.getEvolutions(evolutionChain) },
         saveFetchResult = {
+            Log.e("CROCDC saveFetchResult", evolutionChain.toString())
+            Log.e("CROCDC saveFetchResult", it.toString())
             it.data?.let {
                 val evolvesTo = it.chain.evolvesTo[0]
-                val evolvesTo2 = it.chain.evolvesTo[1]
+                val evolvesTo2 = it.chain.evolvesTo[0].evolvesTo?.get(0)
                 dao.save(
                     EvolutionEntity(
                         evolutionChain,
@@ -30,18 +33,20 @@ class EvolutionsRepository @Inject constructor(
                                 evolvesTo.species.name,
                                 evolvesTo.species.urlToId()
                             ),
-                            EvolvesTo2(
-                                evolvesTo2.evolutionDetails[0].minLevel,
-                                PokemonEvolution(
-                                    evolvesTo2.species.name,
-                                    evolvesTo.species.urlToId()
+                            evolvesTo2?.let {
+                                EvolvesTo2(
+                                    it.evolutionDetails[0].minLevel,
+                                    PokemonEvolution(
+                                        it.species.name,
+                                        it.species.urlToId()
+                                    )
                                 )
-                            )
+                            }
                         )
                     )
                 )
             }
         },
-        shouldFetch = { it != null }
+        shouldFetch = { it == null }
     )
 }

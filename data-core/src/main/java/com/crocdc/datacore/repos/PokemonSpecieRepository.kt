@@ -11,13 +11,19 @@ class PokemonSpecieRepository @Inject constructor(
     private val dataSource: PokemonSpeciesDataSourceProvider
 ) {
     fun getPokemonSpecie(name: String) = networkBoundResource(
-        query = { dao.getPokemonSpecie(name) },
-        fetch = { dataSource.getPokemonSpecies(name) },
+        query = {
+            dao.getPokemonSpecie(name)
+        },
+        fetch = {
+            dataSource.getPokemonSpecies(name)
+        },
         saveFetchResult = {
             it.data?.let {
-                dao.save(PokemonSpecieEntity(name, it.evolutionChain.url))
+                dao.save(PokemonSpecieEntity(name, it.evolutionChain.urlToId()))
             }
         },
-        shouldFetch = { it != null }
+        shouldFetch = {
+            it == null
+        }
     )
 }

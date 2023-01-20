@@ -45,7 +45,7 @@ class EvolutionDaoTest {
     @Throws(Exception::class)
     fun saveAndGet() = runTest {
         val evolutionEntity = EvolutionEntity(
-            NAME,
+            chain,
             EvolvesTo(
                 16,
                 PokemonEvolution("wartortle", "image"),
@@ -60,12 +60,12 @@ class EvolutionDaoTest {
 
         )
         dao.save(evolutionEntity)
-        dao.getEvolutionEntity(NAME).take(1).collect {
-            TestCase.assertEquals(NAME, it?.name)
+        dao.getEvolutionEntity(chain).take(1).collect {
+            TestCase.assertEquals(chain, it?.chain)
         }
     }
 
     companion object {
-        private const val NAME = "Squirtle"
+        private const val chain = "1"
     }
 }

@@ -2,6 +2,7 @@ package com.crocdc.datacore
 
 import com.crocdc.datacore.repos.PokemonRepository
 import com.crocdc.datadatabase.dao.PokemonDao
+import com.crocdc.datadatabase.dao.PokemonInfoDao
 import com.crocdc.datadatabase.model.PokemonEntity
 import com.crocdc.datanetworking.datasource.PokemonDataSourceProvider
 import io.mockk.Called
@@ -19,33 +20,36 @@ class PokemonRepositoryTest {
 
     private val dataSource: PokemonDataSourceProvider = mockk()
 
-    private val productDao: PokemonDao = mockk()
+    private val pokemonDao: PokemonDao = mockk()
+
+    private val pokemonInfoDao: PokemonInfoDao = mockk()
 
     private val repository: PokemonRepository = PokemonRepository(
-        productDao,
+        pokemonDao,
+        pokemonInfoDao,
         dataSource
     )
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun searchShouldFetchTrue() {
-        every { productDao.search(null) } returns flow { emit(emptyList()) }
+        every { pokemonDao.search(null) } returns flow { emit(emptyList()) }
         runTest {
             repository.getPokemonsListing(null).take(4).collect {}
             verify { dataSource.getPokemonsListing() }
-            verify { productDao.search(null) }
+            verify { pokemonDao.search(null) }
         }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun searchShouldFetchFalse() {
-        every { productDao.search(null) } returns flow { emit(listOf(pokemon)) }
+        every { pokemonDao.search(null) } returns flow { emit(listOf(pokemon)) }
 
         runTest {
             repository.getPokemonsListing(null).take(4).collect {}
             verify { dataSource.getPokemonsListing() wasNot Called }
-            verify { productDao.search(null) }
+            verify { pokemonDao.search(null) }
         }
     }
 
