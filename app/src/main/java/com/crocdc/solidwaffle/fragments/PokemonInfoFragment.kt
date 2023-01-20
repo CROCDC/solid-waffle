@@ -2,6 +2,7 @@ package com.crocdc.solidwaffle.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,7 +42,7 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                 it?.let {
                     binding.img.fetchImage(it.image)
                     it.types.getOrNull(0)?.getColor()?.let {
-                        binding.constraint.setBackgroundColor(
+                        binding.collapsing.setBackgroundColor(
                             ContextCompat.getColor(
                                 requireContext(),
                                 it
