@@ -26,4 +26,6 @@
     <color name="psychic">#F87C7A</color>
     <color name="rock">#CBC194</color>
     <color name="steel">#5094A1</color>
+    <color name="gray_DFDFDF">#DFDFDF</color>
+    <color name="gray_EDEDED">#EDEDED</color>
 </resources>

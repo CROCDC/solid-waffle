@@ -12,6 +12,6 @@ interface EvolutionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(evolutionEntity: EvolutionEntity)
 
-    @Query("SELECT * FROM EvolutionEntity WHERE name == :name")
-    fun getEvolutionEntity(name: String): Flow<EvolutionEntity?>
+    @Query("SELECT * FROM EvolutionEntity WHERE chain  == :chain")
+    fun getEvolutionEntity(chain: String): Flow<EvolutionEntity?>
 }

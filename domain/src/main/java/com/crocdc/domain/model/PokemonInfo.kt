@@ -1,4 +1,4 @@
-package com.crocdc.datacore.model
+package com.crocdc.domain.model
 
 class PokemonInfo(
     val name: String,
@@ -7,4 +7,5 @@ class PokemonInfo(
     val moves: List<Move>,
     val abilities: List<Ability>,
     val locationAreaEncounters: String,
+    val sprite: String
 )

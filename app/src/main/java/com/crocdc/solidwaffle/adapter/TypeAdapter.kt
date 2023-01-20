@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.crocdc.datacore.model.Type
+import com.crocdc.domain.model.Type
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.databinding.ListItemTypeBinding
 

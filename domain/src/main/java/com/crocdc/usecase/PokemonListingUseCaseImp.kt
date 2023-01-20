@@ -1,6 +1,6 @@
 package com.crocdc.usecase
 
-import com.crocdc.datacore.model.Pokemon
+import com.crocdc.domain.model.Pokemon
 import com.crocdc.datacore.repos.PokemonRepository
 import com.crocdc.mapper.PokemonMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi

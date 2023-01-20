@@ -1,32 +1,25 @@
 package com.crocdc.solidwaffle.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.crocdc.solidwaffle.R
-import com.crocdc.solidwaffle.vm.EvolutionsViewModel
+import com.crocdc.solidwaffle.databinding.FragmentEvolutionsBinding
+import com.crocdc.solidwaffle.util.viewDataBinding
+import com.crocdc.solidwaffle.vm.PokemonInfoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class EvolutionsFragment : Fragment() {
+@AndroidEntryPoint
+class EvolutionsFragment : Fragment(R.layout.fragment_evolutions) {
 
-    companion object {
-        fun newInstance() = EvolutionsFragment()
-    }
+    private val binding: FragmentEvolutionsBinding by viewDataBinding()
 
-    private lateinit var viewModel: EvolutionsViewModel
+    private val viewModel: PokemonInfoViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_evolutions, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EvolutionsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

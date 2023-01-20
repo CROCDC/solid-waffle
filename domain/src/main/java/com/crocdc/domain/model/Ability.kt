@@ -1,3 +1,3 @@
-package com.crocdc.datacore.model
+package com.crocdc.domain.model
 
 data class Ability(val name: String)

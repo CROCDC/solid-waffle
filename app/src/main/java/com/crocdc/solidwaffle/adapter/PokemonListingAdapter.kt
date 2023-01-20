@@ -6,7 +6,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.crocdc.datacore.model.Pokemon
+import com.crocdc.domain.model.Pokemon
 import com.crocdc.solidwaffle.databinding.ListItemPokemonBinding
 import com.crocdc.solidwaffle.fetchImage
 import com.crocdc.solidwaffle.fragments.PokemonListingFragmentDirections

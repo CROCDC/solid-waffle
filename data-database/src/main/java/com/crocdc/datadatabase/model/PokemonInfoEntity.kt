@@ -10,5 +10,6 @@ data class PokemonInfoEntity(
     val moves: List<Move>,
     val abilities: List<Ability>,
     val locationAreaEncounters: String,
-    val image: String
+    val image: String,
+    val sprite: String
 )

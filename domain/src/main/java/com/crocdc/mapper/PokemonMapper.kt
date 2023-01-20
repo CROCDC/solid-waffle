@@ -1,6 +1,6 @@
 package com.crocdc.mapper
 
-import com.crocdc.datacore.model.Pokemon
+import com.crocdc.domain.model.Pokemon
 import com.crocdc.datadatabase.model.PokemonEntity
 
 object PokemonMapper : BaseMapper<PokemonEntity, Pokemon>() {

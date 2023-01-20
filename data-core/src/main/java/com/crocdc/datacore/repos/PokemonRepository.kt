@@ -58,7 +58,8 @@ class PokemonRepository @Inject constructor(
                         it.moves.map { Move(it.move.name) },
                         it.abilities.map { Ability(it.ability.name) },
                         it.locationAreaEncounters,
-                        it.sprites.other.officialArtwork.frontDefault
+                        it.sprites.other.officialArtwork.frontDefault,
+                        it.sprites.frontDefault
                     )
                 )
             }

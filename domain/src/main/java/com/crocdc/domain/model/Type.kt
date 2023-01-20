@@ -1,4 +1,4 @@
-package com.crocdc.datacore.model
+package com.crocdc.domain.model
 
 enum class Type {
     FIRE,
