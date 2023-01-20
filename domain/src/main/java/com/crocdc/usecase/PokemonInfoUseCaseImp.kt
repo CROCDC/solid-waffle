@@ -2,6 +2,7 @@ package com.crocdc.usecase
 
 import com.crocdc.datacore.model.PokemonInfo
 import com.crocdc.datacore.repos.PokemonRepository
+import com.crocdc.datacore.repos.PokemonSpecieRepository
 import com.crocdc.mapper.PokemonInfoMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PokemonInfoUseCaseImp @Inject constructor(
-    repository: PokemonRepository
+    pokemonRepository: PokemonRepository,
+    specieRepository: PokemonSpecieRepository,
 ) : PokemonInfoUseCase {
 
     private val name: MutableStateFlow<String?> = MutableStateFlow(null)
@@ -20,7 +22,7 @@ class PokemonInfoUseCaseImp @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     override val pokemonInfo: Flow<PokemonInfo?> = name.flatMapLatest { name ->
         name?.let {
-            repository.getPokemonInfo(name).map { entity ->
+            pokemonRepository.getPokemonInfo(name).map { entity ->
                 entity?.let { PokemonInfoMapper.transform(it) }
             }
         } ?: emptyFlow()

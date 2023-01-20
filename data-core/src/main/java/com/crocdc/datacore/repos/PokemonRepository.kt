@@ -32,9 +32,8 @@ class PokemonRepository @Inject constructor(
         saveFetchResult = { r ->
             pokemonDao.saveAll(
                 r.data?.results?.map { listing ->
-                    val split = listing.url.split("/")
                     PokemonEntity(
-                        split[split.size - 2],
+                        listing.urlToId(),
                         listing.name
                     )
                 }.orEmpty()

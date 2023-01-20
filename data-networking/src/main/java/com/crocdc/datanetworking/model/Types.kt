@@ -1,3 +1,3 @@
 package com.crocdc.datanetworking.model
 
-data class Types(val type: Type)
+data class Types(val type: NamedApiResource)

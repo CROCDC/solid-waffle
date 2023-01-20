@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class EvolutionEntity(
-    @PrimaryKey val name: String,
+    @PrimaryKey val chain: String,
     @Embedded val evolvesTo: EvolvesTo
 )
