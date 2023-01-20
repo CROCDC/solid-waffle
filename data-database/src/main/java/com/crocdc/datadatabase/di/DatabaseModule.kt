@@ -19,6 +19,7 @@ package com.crocdc.datadatabase.di
 import android.content.Context
 import androidx.room.Room
 import com.crocdc.datadatabase.PokemonDatabase
+import com.crocdc.datadatabase.dao.EncountersDao
 import com.crocdc.datadatabase.dao.EvolutionDao
 import com.crocdc.datadatabase.dao.PokemonDao
 import com.crocdc.datadatabase.dao.PokemonInfoDao
@@ -47,6 +48,10 @@ object DatabaseModule {
     @Provides
     fun provideEvolutionDao(appDatabase: PokemonDatabase): EvolutionDao =
         appDatabase.evolutionDao()
+
+    @Provides
+    fun provideEncountersDao(appDatabase: PokemonDatabase): EncountersDao =
+        appDatabase.encountersDao()
 
     @Provides
     @Singleton
