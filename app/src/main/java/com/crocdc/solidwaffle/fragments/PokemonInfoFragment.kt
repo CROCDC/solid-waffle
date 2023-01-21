@@ -48,12 +48,12 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                 typeAdapter.submitList(it?.types)
                 it?.let {
                     it.types.getOrNull(0)?.getColor()?.let {
-                        binding.collapsing.setBackgroundColor(
-                            ContextCompat.getColor(
-                                requireContext(),
-                                it
-                            )
+                        val color = ContextCompat.getColor(
+                            requireContext(),
+                            it
                         )
+                        binding.collapsing.setBackgroundColor(color)
+                        binding.tabLayout.setSelectedTabIndicatorColor(color)
                     }
                 }
             }

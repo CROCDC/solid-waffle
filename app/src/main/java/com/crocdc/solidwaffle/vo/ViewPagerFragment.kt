@@ -7,7 +7,7 @@ sealed class ViewPagerFragment {
     abstract val title: Int
 
     data class Evolution(override val name: String) : ViewPagerFragment() {
-        override val title: Int = R.string.evolutions
+        override val title: Int = R.string.evolution
     }
 
     data class Moves(override val name: String) : ViewPagerFragment() {
