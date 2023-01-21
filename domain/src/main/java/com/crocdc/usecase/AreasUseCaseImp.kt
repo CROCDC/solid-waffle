@@ -3,6 +3,7 @@ package com.crocdc.delegate
 import com.crocdc.datacore.repos.EncountersRepository
 import com.crocdc.domain.model.Area
 import com.crocdc.mapper.AreaMapper
+import com.crocdc.usecase.AreasUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow

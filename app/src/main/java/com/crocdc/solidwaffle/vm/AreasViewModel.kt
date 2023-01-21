@@ -1,7 +1,7 @@
 package com.crocdc.solidwaffle.vm
 
 import androidx.lifecycle.ViewModel
-import com.crocdc.delegate.AreasUseCase
+import com.crocdc.usecase.AreasUseCase
 import com.crocdc.domain.model.Area
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

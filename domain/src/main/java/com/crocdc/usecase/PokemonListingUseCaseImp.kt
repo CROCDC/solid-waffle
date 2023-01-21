@@ -1,7 +1,7 @@
-package com.crocdc.delegate
+package com.crocdc.usecase
 
 import com.crocdc.datacore.repos.PokemonRepository
-import com.crocdc.delegate.PokemonListingUseCase
+import com.crocdc.usecase.PokemonListingUseCase
 import com.crocdc.domain.model.Pokemon
 import com.crocdc.mapper.PokemonMapper
 import kotlinx.coroutines.flow.Flow

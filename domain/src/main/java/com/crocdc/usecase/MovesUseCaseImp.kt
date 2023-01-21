@@ -1,4 +1,4 @@
-package com.crocdc.delegate
+package com.crocdc.usecase
 
 import com.crocdc.datacore.repos.PokemonRepository
 import com.crocdc.domain.model.PokemonMove

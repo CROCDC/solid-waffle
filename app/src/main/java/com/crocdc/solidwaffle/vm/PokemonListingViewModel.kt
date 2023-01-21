@@ -1,7 +1,7 @@
 package com.crocdc.solidwaffle.vm
 
 import androidx.lifecycle.ViewModel
-import com.crocdc.delegate.PokemonListingUseCase
+import com.crocdc.usecase.PokemonListingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject

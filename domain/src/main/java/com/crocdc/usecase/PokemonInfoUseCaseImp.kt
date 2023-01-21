@@ -3,6 +3,7 @@ package com.crocdc.delegate
 import com.crocdc.datacore.repos.PokemonRepository
 import com.crocdc.domain.model.PokemonInfo
 import com.crocdc.mapper.PokemonInfoMapper
+import com.crocdc.usecase.PokemonInfoUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow

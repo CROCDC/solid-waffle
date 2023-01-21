@@ -1,7 +1,7 @@
 package com.crocdc.solidwaffle.vm
 
 import androidx.lifecycle.ViewModel
-import com.crocdc.delegate.EvolutionsUseCase
+import com.crocdc.usecase.EvolutionsUseCase
 import com.crocdc.domain.model.FromEvolutionTo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

@@ -1,15 +1,14 @@
 package com.crocdc.solidwaffle.vm
 
 import androidx.lifecycle.ViewModel
-import com.crocdc.delegate.AreasUseCase
-import com.crocdc.delegate.PokemonInfoUseCase
+import com.crocdc.usecase.AreasUseCase
+import com.crocdc.usecase.PokemonInfoUseCase
 import com.crocdc.domain.model.Area
 import com.crocdc.domain.model.PokemonInfo
 import com.crocdc.solidwaffle.vo.ViewPagerFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 

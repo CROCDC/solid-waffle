@@ -4,6 +4,7 @@ import com.crocdc.datacore.repos.EvolutionsRepository
 import com.crocdc.datacore.repos.PokemonSpecieRepository
 import com.crocdc.domain.model.FromEvolutionTo
 import com.crocdc.domain.model.Pokemon
+import com.crocdc.usecase.EvolutionsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow

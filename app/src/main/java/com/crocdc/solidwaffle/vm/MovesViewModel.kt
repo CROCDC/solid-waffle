@@ -1,7 +1,7 @@
 package com.crocdc.solidwaffle.vm
 
 import androidx.lifecycle.ViewModel
-import com.crocdc.delegate.MovesUseCase
+import com.crocdc.usecase.MovesUseCase
 import com.crocdc.domain.model.PokemonMove
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
