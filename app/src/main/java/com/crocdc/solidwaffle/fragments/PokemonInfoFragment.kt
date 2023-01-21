@@ -55,19 +55,12 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         lifecycleScope.launch {
             viewModel.fragments.collect {
                 pokemonInfoAdapter.setFragments(it)
+                TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+                    it.getOrNull(position)?.let {
+                        tab.setText(it.title)
+                    }
+                }.attach()
             }
         }
-
-        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-            when (position) {
-                0 -> R.string.evolutions
-                1 -> R.string.moves
-                2 -> R.string.abilities
-                3 -> R.string.areas
-                else -> null
-            }?.let {
-                tab.setText(it)
-            }
-        }.attach()
     }
 }
