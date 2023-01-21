@@ -1,5 +1,13 @@
 package com.crocdc.di
 
+import com.crocdc.usecase.AbilitiesUseCase
+import com.crocdc.usecase.AbilitiesUseCaseImp
+import com.crocdc.usecase.AreasUseCase
+import com.crocdc.usecase.AreasUseCaseImp
+import com.crocdc.usecase.EvolutionsUseCase
+import com.crocdc.usecase.EvolutionsUseCaseImp
+import com.crocdc.usecase.MovesUseCase
+import com.crocdc.usecase.MovesUseCaseImp
 import com.crocdc.usecase.PokemonInfoUseCase
 import com.crocdc.usecase.PokemonInfoUseCaseImp
 import com.crocdc.usecase.PokemonListingUseCase
@@ -22,4 +30,24 @@ abstract class UseCaseModule {
     abstract fun bindPokemonListingUseCase(
         useCase: PokemonListingUseCaseImp
     ): PokemonListingUseCase
+
+    @Binds
+    abstract fun bindAbilitiesUseCase(
+        useCase: AbilitiesUseCaseImp
+    ): AbilitiesUseCase
+
+    @Binds
+    abstract fun bindAreasUseCase(
+        useCase: AreasUseCaseImp
+    ): AreasUseCase
+
+    @Binds
+    abstract fun bindEvolutionsUseCase(
+        useCase: EvolutionsUseCaseImp
+    ): EvolutionsUseCase
+
+    @Binds
+    abstract fun bindMovesUseCase(
+        useCase: MovesUseCaseImp
+    ): MovesUseCase
 }

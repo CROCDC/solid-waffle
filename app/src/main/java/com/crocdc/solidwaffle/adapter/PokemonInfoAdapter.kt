@@ -12,10 +12,10 @@ class PokemonInfoAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 4
 
     override fun createFragment(position: Int): Fragment = when (position) {
-        0 -> EvolutionsFragment()
-        1 -> MovesFragment()
-        2 -> AbilitiesFragment()
-        3 -> AreasFragment()
+        0 -> EvolutionsFragment.newInstance("bulbasaur")
+        1 -> MovesFragment.newInstance("bulbasaur")
+        2 -> AbilitiesFragment.newInstance("bulbasaur")
+        3 -> AreasFragment.newInstance("bulbasaur")
         else -> throw UnsupportedOperationException()
     }
 }
