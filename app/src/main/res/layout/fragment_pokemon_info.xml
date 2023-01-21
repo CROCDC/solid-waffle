@@ -68,6 +68,7 @@
                         tools:listitem="@layout/list_item_type" />
 
                     <ImageView
+                        android:id="@+id/img_select_image"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:layout_marginTop="24dp"

@@ -70,6 +70,7 @@ class PokemonRepository @Inject constructor(
                         it.abilities.map { Ability(it.ability.name, it.isHidden) },
                         it.locationAreaEncounters,
                         it.sprites.other.officialArtwork.frontDefault,
+                        it.sprites.other.officialArtwork.frontShiny,
                         it.sprites.frontDefault
                     )
                 )

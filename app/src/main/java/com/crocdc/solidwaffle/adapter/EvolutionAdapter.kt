@@ -2,6 +2,7 @@ package com.crocdc.solidwaffle.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -31,10 +32,14 @@ class EvolutionAdapter : ListAdapter<FromEvolutionTo, EvolutionAdapter.ViewHolde
         fun bind(fromEvolutionTo: FromEvolutionTo) {
             binding.imgFrom.fetchImage(fromEvolutionTo.from.image)
             binding.imgTo.fetchImage(fromEvolutionTo.to.image)
-            binding.txtMinLevel.text = itemView.context.getString(
-                R.string.min_level,
-                fromEvolutionTo.minLevel
-            )
+            if (fromEvolutionTo.minLevel != null) {
+                binding.txtMinLevel.text = itemView.context.getString(
+                    R.string.min_level,
+                    fromEvolutionTo.minLevel
+                )
+            } else {
+                binding.txtMinLevel.isVisible = false
+            }
             binding.txtFrom.text = fromEvolutionTo.from.name
             binding.txtTo.text = fromEvolutionTo.to.name
         }

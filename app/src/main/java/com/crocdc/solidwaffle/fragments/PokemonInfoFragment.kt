@@ -2,6 +2,7 @@ package com.crocdc.solidwaffle.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,12 +36,17 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         binding.txtName.text = args.name
         val pokemonInfoAdapter = PokemonInfoAdapter(this)
         binding.viewPager.adapter = pokemonInfoAdapter
+
+        lifecycleScope.launch {
+            viewModel.selectedImage.collect {
+                it?.image?.let { binding.img.fetchImage(it) }
+            }
+        }
         lifecycleScope.launch {
             viewModel.setName(args.name)
             viewModel.pokemonInfo.collect {
                 typeAdapter.submitList(it?.types)
                 it?.let {
-                    binding.img.fetchImage(it.image)
                     it.types.getOrNull(0)?.getColor()?.let {
                         binding.collapsing.setBackgroundColor(
                             ContextCompat.getColor(
@@ -60,6 +66,22 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                         tab.setText(it.title)
                     }
                 }.attach()
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.imageOptions.collect { images ->
+                binding.imgSelectImage.setOnClickListener {
+                    val popupMenu = PopupMenu(it.context, it)
+                    images.forEachIndexed { index, imageOption ->
+                        popupMenu.menu.add(index, index, index, getString(imageOption.title))
+                    }
+                    popupMenu.menuInflater.inflate(R.menu.select_image_menu, popupMenu.menu)
+                    popupMenu.setOnMenuItemClickListener { menuItem ->
+                        lifecycleScope.launch { viewModel.setSelectedImage(images[menuItem.order]) }
+                        true
+                    }
+                    popupMenu.show()
+                }
             }
         }
     }

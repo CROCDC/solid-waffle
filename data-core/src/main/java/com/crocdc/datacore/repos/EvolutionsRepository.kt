@@ -45,6 +45,9 @@ class EvolutionsRepository @Inject constructor(
                 )
             }
         },
-        shouldFetch = { it == null }
+        shouldFetch = { it == null },
+        onFetchFailed = {
+            throwable -> throw throwable
+        }
     )
 }

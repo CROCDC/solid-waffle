@@ -11,7 +11,8 @@ object PokemonInfoMapper : BaseMapper<PokemonInfoEntity, PokemonInfo>() {
     override fun transform(inputModel: PokemonInfoEntity): PokemonInfo =
         PokemonInfo(
             inputModel.name,
-            inputModel.image,
+            inputModel.officialArtWork,
+            inputModel.officialArtWorkShiny,
             inputModel.types.map { Type.valueOf(it.name.uppercase()) },
             inputModel.moves.map { move ->
                 PokemonMove(
