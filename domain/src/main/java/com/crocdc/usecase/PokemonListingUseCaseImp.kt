@@ -1,30 +1,21 @@
-package com.crocdc.usecase
+package com.crocdc.delegate
 
-import com.crocdc.domain.model.Pokemon
 import com.crocdc.datacore.repos.PokemonRepository
+import com.crocdc.delegate.PokemonListingUseCase
+import com.crocdc.domain.model.Pokemon
 import com.crocdc.mapper.PokemonMapper
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PokemonListingUseCaseImp @Inject constructor(
-    repository: PokemonRepository
+    private val repository: PokemonRepository
 ) : PokemonListingUseCase {
 
-    private val query: MutableStateFlow<String?> = MutableStateFlow(null)
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    override val pokemons: Flow<List<Pokemon>> = query.flatMapLatest { query ->
+    override fun invoke(query: Flow<String?>): Flow<List<Pokemon>> = query.flatMapLatest { query ->
         repository.getPokemonsListing(query).map {
             PokemonMapper.transform(it)
         }
-
-    }
-
-    override suspend fun setQuery(query: String?) {
-        this.query.emit(query)
     }
 }

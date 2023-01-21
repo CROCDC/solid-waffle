@@ -2,7 +2,6 @@ package com.crocdc.solidwaffle.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,14 +30,15 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = TypeAdapter()
-        binding.recyclerTypes.adapter = adapter
+        val typeAdapter = TypeAdapter()
+        binding.recyclerTypes.adapter = typeAdapter
         binding.txtName.text = args.name
+        val pokemonInfoAdapter = PokemonInfoAdapter(this)
+        binding.viewPager.adapter = pokemonInfoAdapter
         lifecycleScope.launch {
             viewModel.setName(args.name)
-
             viewModel.pokemonInfo.collect {
-                adapter.submitList(it?.types)
+                typeAdapter.submitList(it?.types)
                 it?.let {
                     binding.img.fetchImage(it.image)
                     it.types.getOrNull(0)?.getColor()?.let {
@@ -52,7 +52,12 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                 }
             }
         }
-        binding.viewPager.adapter = PokemonInfoAdapter(this)
+        lifecycleScope.launch {
+            viewModel.fragments.collect {
+                pokemonInfoAdapter.setFragments(it)
+            }
+        }
+
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> R.string.evolutions

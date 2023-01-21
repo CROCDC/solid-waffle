@@ -1,12 +1,24 @@
-package com.crocdc.usecase
+package com.crocdc.delegate
 
-import com.crocdc.delegate.PokemonInfoDelegate
+import com.crocdc.datacore.repos.PokemonRepository
 import com.crocdc.domain.model.PokemonInfo
+import com.crocdc.mapper.PokemonInfoMapper
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PokemonInfoUseCaseImp @Inject constructor(
-    delegate: PokemonInfoDelegate
-) : PokemonInfoUseCase, PokemonInfoDelegate by delegate {
-    override val pokemonInfo: Flow<PokemonInfo?> = delegate.pokemonInfo
+    private val pokemonRepository: PokemonRepository,
+) : PokemonInfoUseCase {
+    override operator fun invoke(name: Flow<String?>): Flow<PokemonInfo?> = name.flatMapLatest {
+        it?.let {
+            pokemonRepository.getPokemonInfo(it).map { entity ->
+                entity?.let { PokemonInfoMapper.transform(it) }
+            }
+        } ?: emptyFlow()
+    }
 }

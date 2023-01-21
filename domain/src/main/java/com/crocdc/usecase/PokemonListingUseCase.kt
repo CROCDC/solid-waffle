@@ -1,9 +1,8 @@
-package com.crocdc.usecase
+package com.crocdc.delegate
 
 import com.crocdc.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 interface PokemonListingUseCase {
-    val pokemons: Flow<List<Pokemon>>
-    suspend fun setQuery(query: String?)
+    operator fun invoke(query: Flow<String?>): Flow<List<Pokemon>>
 }

@@ -1,9 +1,8 @@
-package com.crocdc.usecase
+package com.crocdc.delegate
 
-import com.crocdc.delegate.PokemonInfoDelegate
-import com.crocdc.domain.model.Move
+import com.crocdc.domain.model.PokemonMove
 import kotlinx.coroutines.flow.Flow
 
-interface MovesUseCase : PokemonInfoDelegate {
-    val moves: Flow<List<Move>>
+interface MovesUseCase {
+    operator fun invoke(name: Flow<String?>): Flow<List<PokemonMove>>
 }

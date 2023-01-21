@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.crocdc.domain.model.Move
+import com.crocdc.domain.model.PokemonMove
 import com.crocdc.solidwaffle.databinding.ListItemMoveBinding
 
-class MoveAdapter : ListAdapter<Move, MoveAdapter.ViewHolder>(DiffUtilCallback) {
+class MoveAdapter : ListAdapter<PokemonMove, MoveAdapter.ViewHolder>(DiffUtilCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         ListItemMoveBinding.inflate(
@@ -24,16 +24,16 @@ class MoveAdapter : ListAdapter<Move, MoveAdapter.ViewHolder>(DiffUtilCallback) 
 
     class ViewHolder(private val binding: ListItemMoveBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(move: Move) {
-            binding.txtName.text = move.name
+        fun bind(pokemonMove: PokemonMove) {
+            binding.txtName.text = pokemonMove.name
         }
     }
 
-    object DiffUtilCallback : DiffUtil.ItemCallback<Move>() {
-        override fun areItemsTheSame(oldItem: Move, newItem: Move): Boolean =
+    object DiffUtilCallback : DiffUtil.ItemCallback<PokemonMove>() {
+        override fun areItemsTheSame(oldItem: PokemonMove, newItem: PokemonMove): Boolean =
             oldItem.name == newItem.name
 
-        override fun areContentsTheSame(oldItem: Move, newItem: Move): Boolean =
+        override fun areContentsTheSame(oldItem: PokemonMove, newItem: PokemonMove): Boolean =
             oldItem == newItem
     }
 }

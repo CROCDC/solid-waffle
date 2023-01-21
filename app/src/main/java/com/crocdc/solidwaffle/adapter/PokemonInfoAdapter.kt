@@ -6,16 +6,25 @@ import com.crocdc.solidwaffle.fragments.AbilitiesFragment
 import com.crocdc.solidwaffle.fragments.AreasFragment
 import com.crocdc.solidwaffle.fragments.EvolutionsFragment
 import com.crocdc.solidwaffle.fragments.MovesFragment
+import com.crocdc.solidwaffle.vo.ViewPagerFragment
 
 class PokemonInfoAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 4
+    private var fragments: List<ViewPagerFragment> = emptyList()
 
-    override fun createFragment(position: Int): Fragment = when (position) {
-        0 -> EvolutionsFragment.newInstance("bulbasaur")
-        1 -> MovesFragment.newInstance("bulbasaur")
-        2 -> AbilitiesFragment.newInstance("bulbasaur")
-        3 -> AreasFragment.newInstance("bulbasaur")
-        else -> throw UnsupportedOperationException()
+    override fun getItemCount(): Int = fragments.size
+
+    fun setFragments(list: List<ViewPagerFragment>) {
+        fragments = list
+        notifyDataSetChanged()
     }
+
+    override fun createFragment(position: Int): Fragment =
+        when (val fragment = fragments.getOrNull(position)) {
+            is ViewPagerFragment.Moves -> MovesFragment.newInstance(fragment.name)
+            is ViewPagerFragment.Evolution -> EvolutionsFragment.newInstance(fragment.name)
+            is ViewPagerFragment.Areas -> AreasFragment.newInstance(fragment.name)
+            is ViewPagerFragment.Abilities -> AbilitiesFragment.newInstance(fragment.name)
+            null -> throw UnsupportedOperationException()
+        }
 }
