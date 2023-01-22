@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/pokemonListingFragment"
         android:name="com.crocdc.solidwaffle.fragments.PokemonListingFragment"
-        tools:layout="@layout/fragment_pokemon_listing" >
+        tools:layout="@layout/fragment_pokemon_listing">
         <action
             android:id="@+id/action_pokemonListingFragment_to_pokemonInfoFragment"
             app:destination="@id/pokemonInfoFragment" />
@@ -15,9 +15,22 @@
     <fragment
         android:id="@+id/pokemonInfoFragment"
         android:name="com.crocdc.solidwaffle.fragments.PokemonInfoFragment"
-        android:label="PokemonInfoFragment" >
+        android:label="PokemonInfoFragment">
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_pokemonInfoFragment_to_locationAreaFragment"
+            app:destination="@id/locationAreaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationAreaFragment"
+        android:name="com.crocdc.solidwaffle.fragments.LocationAreaFragment">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_locationAreaFragment_to_pokemonInfoFragment"
+            app:destination="@id/pokemonInfoFragment" />
     </fragment>
 </navigation>

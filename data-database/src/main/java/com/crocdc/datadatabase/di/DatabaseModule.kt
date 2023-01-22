@@ -21,6 +21,7 @@ import androidx.room.Room
 import com.crocdc.datadatabase.PokemonDatabase
 import com.crocdc.datadatabase.dao.EncountersDao
 import com.crocdc.datadatabase.dao.EvolutionDao
+import com.crocdc.datadatabase.dao.LocationAreaDao
 import com.crocdc.datadatabase.dao.PokemonDao
 import com.crocdc.datadatabase.dao.PokemonInfoDao
 import com.crocdc.datadatabase.dao.PokemonSpecieDao
@@ -52,6 +53,10 @@ object DatabaseModule {
     @Provides
     fun provideEncountersDao(appDatabase: PokemonDatabase): EncountersDao =
         appDatabase.encountersDao()
+
+    @Provides
+    fun provideLocationAreaDao(appDatabase: PokemonDatabase): LocationAreaDao =
+        appDatabase.locationAreaDao()
 
     @Provides
     @Singleton

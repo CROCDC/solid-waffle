@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.crocdc.datadatabase.dao.EncountersDao
 import com.crocdc.datadatabase.dao.EvolutionDao
-import com.crocdc.datadatabase.dao.LocationAreaEntityDao
+import com.crocdc.datadatabase.dao.LocationAreaDao
 import com.crocdc.datadatabase.dao.PokemonDao
 import com.crocdc.datadatabase.dao.PokemonInfoDao
 import com.crocdc.datadatabase.dao.PokemonSpecieDao
@@ -35,7 +35,7 @@ abstract class PokemonDatabase : RoomDatabase() {
 
     abstract fun encountersDao(): EncountersDao
 
-    abstract fun locationAreaDao(): LocationAreaEntityDao
+    abstract fun locationAreaDao(): LocationAreaDao
 
     companion object {
         const val DATABASE_NAME: String = "pokemon_database"

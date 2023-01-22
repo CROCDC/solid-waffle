@@ -7,7 +7,8 @@ object AreaMapper : BaseMapper<EncountersEntity, List<Area>>() {
     override fun transform(inputModel: EncountersEntity): List<Area> =
         inputModel.encounters.map {
             Area(
-                it.area
+                it.area,
+                it.id
             )
         }
 }

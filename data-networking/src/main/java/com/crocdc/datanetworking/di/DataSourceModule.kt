@@ -4,6 +4,8 @@ import com.crocdc.datanetworking.datasource.EncountersDataSource
 import com.crocdc.datanetworking.datasource.EncountersDataSourceProvider
 import com.crocdc.datanetworking.datasource.EvolutionsDataSource
 import com.crocdc.datanetworking.datasource.EvolutionsDataSourceProvider
+import com.crocdc.datanetworking.datasource.LocationAreaDataSource
+import com.crocdc.datanetworking.datasource.LocationAreaDataSourceProvider
 import com.crocdc.datanetworking.datasource.PokemonDataSource
 import com.crocdc.datanetworking.datasource.PokemonDataSourceProvider
 import com.crocdc.datanetworking.datasource.PokemonSpeciesDataSource
@@ -36,4 +38,9 @@ abstract class DataSourceModule {
     abstract fun bindEncountersDataSource(
         dataSource: EncountersDataSource
     ): EncountersDataSourceProvider
+
+    @Binds
+    abstract fun bindLocationAreaDataSource(
+        dataSource: LocationAreaDataSource
+    ): LocationAreaDataSourceProvider
 }

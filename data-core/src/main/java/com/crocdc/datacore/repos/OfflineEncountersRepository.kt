@@ -20,7 +20,10 @@ class OfflineEncountersRepository @Inject constructor(
                 EncountersEntity(
                     name,
                     encounters.map {
-                        Encounter(it.locationArea.name)
+                        Encounter(
+                            it.locationArea.name,
+                            it.locationArea.urlToId()
+                        )
                     }
                 )
             )

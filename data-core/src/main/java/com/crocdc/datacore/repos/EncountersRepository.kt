@@ -22,7 +22,8 @@ class EncountersRepository @Inject constructor(
                         name,
                         encounters.map {
                             Encounter(
-                                it.locationArea.name
+                                it.locationArea.name,
+                                it.locationArea.urlToId()
                             )
                         }
                     )

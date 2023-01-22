@@ -2,13 +2,13 @@ package com.crocdc.datacore.repos
 
 import com.crocdc.datacore.mapper.LocationAreaMapper
 import com.crocdc.datacore.networkBoundResource
-import com.crocdc.datadatabase.dao.LocationAreaEntityDao
+import com.crocdc.datadatabase.dao.LocationAreaDao
 import com.crocdc.datanetworking.datasource.LocationAreaDataSourceProvider
 import javax.inject.Inject
 
 class LocationAreaRepository @Inject constructor(
     private val dataSource: LocationAreaDataSourceProvider,
-    private val dao: LocationAreaEntityDao
+    private val dao: LocationAreaDao
 ) {
 
     fun getLocationArea(id: String) = networkBoundResource(

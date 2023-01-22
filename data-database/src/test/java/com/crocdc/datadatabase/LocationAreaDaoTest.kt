@@ -1,6 +1,6 @@
 package com.crocdc.datadatabase
 
-import com.crocdc.datadatabase.dao.LocationAreaEntityDao
+import com.crocdc.datadatabase.dao.LocationAreaDao
 import com.crocdc.datadatabase.model.LocationAreaEntity
 import com.crocdc.datadatabase.model.PokemonArea
 import com.crocdc.datadatabase.model.PokemonEncounter
@@ -13,9 +13,9 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class LocationAreaEntityDaoTest : DaoTest() {
+class LocationAreaDaoTest : DaoTest() {
 
-    val dao: Lazy<LocationAreaEntityDao> = lazy {
+    val dao: Lazy<LocationAreaDao> = lazy {
         db.locationAreaDao()
     }
 

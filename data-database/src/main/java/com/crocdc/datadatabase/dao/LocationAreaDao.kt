@@ -8,7 +8,7 @@ import com.crocdc.datadatabase.model.LocationAreaEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface LocationAreaEntityDao {
+interface LocationAreaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun save(locationAreaEntity: LocationAreaEntity)

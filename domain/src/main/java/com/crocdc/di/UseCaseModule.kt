@@ -6,6 +6,8 @@ import com.crocdc.usecase.AreasUseCase
 import com.crocdc.usecase.AreasUseCaseImp
 import com.crocdc.usecase.EvolutionsUseCase
 import com.crocdc.usecase.EvolutionsUseCaseImp
+import com.crocdc.usecase.LocationAreaUseCase
+import com.crocdc.usecase.LocationAreaUseCaseImp
 import com.crocdc.usecase.MovesUseCase
 import com.crocdc.usecase.MovesUseCaseImp
 import com.crocdc.usecase.PokemonInfoUseCase
@@ -50,4 +52,9 @@ abstract class UseCaseModule {
     abstract fun bindMovesUseCase(
         useCase: MovesUseCaseImp
     ): MovesUseCase
+
+    @Binds
+    abstract fun bindLocationAreaUseCase(
+        useCase: LocationAreaUseCaseImp
+    ): LocationAreaUseCase
 }

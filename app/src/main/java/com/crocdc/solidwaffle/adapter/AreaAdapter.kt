@@ -2,11 +2,13 @@ package com.crocdc.solidwaffle.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.crocdc.domain.model.Area
 import com.crocdc.solidwaffle.databinding.ListItemAreaBinding
+import com.crocdc.solidwaffle.fragments.PokemonInfoFragmentDirections
 
 class AreaAdapter : ListAdapter<Area, AreaAdapter.ViewHolder>(DiffUtilCallback) {
 
@@ -27,6 +29,13 @@ class AreaAdapter : ListAdapter<Area, AreaAdapter.ViewHolder>(DiffUtilCallback) 
 
         fun bind(area: Area) {
             binding.txtName.text = area.name
+            binding.root.setOnClickListener {
+                it.findNavController().navigate(
+                    PokemonInfoFragmentDirections.actionPokemonInfoFragmentToLocationAreaFragment(
+                        area.id
+                    )
+                )
+            }
         }
     }
 

@@ -29,7 +29,7 @@ class AbilitiesFragment : Fragment(R.layout.fragment_abilities) {
         binding.recycler.adapter = adapter
         lifecycleScope.launch {
             viewModel.setName(checkNotNull(requireArguments().getString(ARG_NAME)))
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.abilities.collect { adapter.submitList(it) }
             }
         }
