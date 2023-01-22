@@ -15,10 +15,15 @@ class EvolutionsRepository @Inject constructor(
         query = { dao.getEvolutionEntity(evolutionChain) },
         fetch = { dataSource.getEvolutions(evolutionChain) },
         saveFetchResult = { r ->
-            r.data?.let {
-                dao.save(EvolutionEntityMapper(evolutionChain).transform(it))
+            r.data?.let { response ->
+                EvolutionEntityMapper(evolutionChain).transform(response)?.let {
+                    dao.save(it)
+                }
             }
         },
-        shouldFetch = { it == null }
+        shouldFetch = { it == null },
+        onFetchFailed = {
+            throw it
+        }
     )
 }

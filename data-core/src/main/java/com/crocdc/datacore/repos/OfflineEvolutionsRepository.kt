@@ -14,9 +14,9 @@ class OfflineEvolutionsRepository @Inject constructor(
     fun getEvolutions(evolutionChain: String) = offlineBoundResource(
         query = { dao.getEvolutionEntity(evolutionChain) },
         fetch = { dataSource.getEvolutions(evolutionChain) },
-        saveFetchResult = {
-            it?.let {
-                dao.save(EvolutionEntityMapper(evolutionChain).transform(it))
+        saveFetchResult = { r ->
+            r?.let { response ->
+                EvolutionEntityMapper(evolutionChain).transform(response)?.let { dao.save(it) }
             }
         }
     )
