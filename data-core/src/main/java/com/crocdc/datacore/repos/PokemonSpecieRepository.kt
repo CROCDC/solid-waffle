@@ -17,8 +17,8 @@ class PokemonSpecieRepository @Inject constructor(
         fetch = {
             dataSource.getPokemonSpecies(name)
         },
-        saveFetchResult = {
-            it.data?.let {
+        saveFetchResult = { r ->
+            r.data?.let {
                 dao.save(PokemonSpecieEntity(name, it.evolutionChain.urlToId()))
             }
         },

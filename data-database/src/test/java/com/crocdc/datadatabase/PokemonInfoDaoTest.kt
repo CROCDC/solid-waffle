@@ -64,7 +64,7 @@ class PokemonInfoDaoTest {
                 listOf(Ability("blaze", true)),
                 "river",
                 "image",
-                "sprite"
+                "shiny",
             )
         )
         dao.getPokemonInfoEntity(name).take(1).collect {

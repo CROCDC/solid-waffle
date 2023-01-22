@@ -61,7 +61,7 @@ class PokemonInfoViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            imageOptions.collect { it.firstOrNull()?.let { setSelectedImage(it) } }
+            imageOptions.collect { options -> options.firstOrNull()?.let { setSelectedImage(it) } }
         }
     }
 

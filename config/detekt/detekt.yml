@@ -40,13 +40,6 @@ console-reports:
     #  - 'FindingsReport'
     - 'FileBasedFindingsReport'
 
-output-reports:
-  active: true
-  exclude:
-  # - 'TxtOutputReport'
-  # - 'XmlOutputReport'
-  # - 'HtmlOutputReport'
-
 comments:
   active: false
 
@@ -452,12 +445,6 @@ style:
     active: false
     imports: [ ]
     forbiddenPatterns: ''
-  ForbiddenMethodCall:
-    active: true
-    methods:
-      - 'kotlin.io.print'
-      - 'kotlin.io.println'
-      - 'kotlinx.coroutines.GlobalScope'
   ForbiddenVoid:
     active: false
     ignoreOverridden: false

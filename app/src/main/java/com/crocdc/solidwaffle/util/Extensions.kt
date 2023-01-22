@@ -11,7 +11,7 @@ fun Type.getColor() = when (this) {
     Type.POISON -> R.color.poison
     Type.ELECTRIC -> R.color.electric
     Type.GHOST -> R.color.ghost
-    Type.FLYING -> R.color.fliying
+    Type.FLYING -> R.color.flying
     Type.FAIRY -> R.color.fairy
     Type.PSYCHIC -> R.color.psychic
     Type.NORMAL -> R.color.normal

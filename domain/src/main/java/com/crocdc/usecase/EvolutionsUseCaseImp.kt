@@ -23,33 +23,36 @@ class EvolutionsUseCaseImp @Inject constructor(
     private val offlinePokemonSpecieRepository: OfflinePokemonSpecieRepository,
     private val networkStatusTracker: NetworkStatusTracker
 ) : EvolutionsUseCase {
-    override fun invoke(name: Flow<String?>): Flow<List<FromEvolutionTo>> = name.flatMapLatest {
-        it?.let {
-            networkStatusTracker.networkStatus.flatMapLatest(
-                onAvailable = {
-                    pokemonSpecieRepository.getPokemonSpecie(it).flatMapLatest { specie ->
-                        specie?.let {
-                            evolutionsRepository.getEvolutions(specie.evolutionChain).mapLatest {
-                                it?.let { entity ->
-                                    FromEvolutionToMapper.transform(entity)
-                                } ?: emptyList()
+    override fun invoke(name: Flow<String?>): Flow<List<FromEvolutionTo>> =
+        name.flatMapLatest { it ->
+            it?.let { name ->
+                networkStatusTracker.networkStatus.flatMapLatest(
+                    onAvailable = {
+                        pokemonSpecieRepository.getPokemonSpecie(name).flatMapLatest { specie ->
+                            specie?.let {
+                                evolutionsRepository.getEvolutions(specie.evolutionChain)
+                                    .mapLatest {
+                                        it?.let { entity ->
+                                            FromEvolutionToMapper.transform(entity)
+                                        } ?: emptyList()
+                                    }
+                            } ?: emptyFlow()
+                        }
+                    },
+                    onUnavailable = {
+                        offlinePokemonSpecieRepository.getPokemonSpecie(name)
+                            .flatMapLatest { specie ->
+                                specie?.let {
+                                    offlineEvolutionsRepository.getEvolutions(specie.evolutionChain)
+                                        .mapLatest {
+                                            it?.let { entity ->
+                                                FromEvolutionToMapper.transform(entity)
+                                            } ?: emptyList()
+                                        }
+                                } ?: emptyFlow()
                             }
-                        } ?: emptyFlow()
                     }
-                },
-                onUnavailable = {
-                    offlinePokemonSpecieRepository.getPokemonSpecie(it).flatMapLatest { specie ->
-                        specie?.let {
-                            offlineEvolutionsRepository.getEvolutions(specie.evolutionChain)
-                                .mapLatest {
-                                    it?.let { entity ->
-                                        FromEvolutionToMapper.transform(entity)
-                                    } ?: emptyList()
-                                }
-                        } ?: emptyFlow()
-                    }
-                }
-            )
-        } ?: emptyFlow()
-    }
+                )
+            } ?: emptyFlow()
+        }
 }

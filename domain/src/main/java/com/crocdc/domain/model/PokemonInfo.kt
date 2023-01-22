@@ -5,7 +5,6 @@ class PokemonInfo(
     val officialArtWork: String,
     val officialArtWorkShiny: String,
     val types: List<Type>,
-    val pokemonMoves: List<PokemonMove>,
     val abilities: List<Ability>,
-    val sprite: String
-)
+    val pokemonMoves: List<PokemonMove>,
+    )

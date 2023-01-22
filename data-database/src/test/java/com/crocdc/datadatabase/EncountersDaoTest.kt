@@ -3,6 +3,7 @@ package com.crocdc.datadatabase
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.crocdc.datadatabase.dao.EncountersDao
+import com.crocdc.datadatabase.model.Encounter
 import com.crocdc.datadatabase.model.EncountersEntity
 import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,9 +41,9 @@ class EncountersDaoTest {
     @Test
     @Throws(Exception::class)
     fun saveAndGet() = runTest {
-        val evolutionEntity = EncountersEntity(name, "area")
-        dao.save(evolutionEntity)
-        dao.getEvolutionEntity(name).take(1).collect {
+        val encounters = EncountersEntity(name, listOf(Encounter("area")))
+        dao.save(encounters)
+        dao.getEncountersEntity(name).take(1).collect {
             TestCase.assertEquals(name, it?.name)
         }
     }

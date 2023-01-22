@@ -15,12 +15,12 @@ class EncountersRepository @Inject constructor(
     fun getEncounters(name: String) = networkBoundResource(
         query = { dao.getEncountersEntity(name) },
         fetch = { dataSource.getEncounters(name) },
-        saveFetchResult = {
-            it.data?.let {
+        saveFetchResult = { r ->
+            r.data?.let { encounters ->
                 dao.save(
                     EncountersEntity(
                         name,
-                        it.map {
+                        encounters.map {
                             Encounter(
                                 it.locationArea.name
                             )

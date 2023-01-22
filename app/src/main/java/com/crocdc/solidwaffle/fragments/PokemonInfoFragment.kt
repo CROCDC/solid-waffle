@@ -38,15 +38,15 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         binding.viewPager.adapter = pokemonInfoAdapter
 
         lifecycleScope.launch {
-            viewModel.selectedImage.collect {
+            viewModel.selectedImage.collect { it ->
                 it?.image?.let { binding.img.fetchImage(it) }
             }
         }
         lifecycleScope.launch {
             viewModel.setName(args.name)
-            viewModel.pokemonInfo.collect {
-                typeAdapter.submitList(it?.types)
-                it?.let {
+            viewModel.pokemonInfo.collect { info ->
+                typeAdapter.submitList(info?.types)
+                info?.let { it ->
                     it.types.getOrNull(0)?.getColor()?.let {
                         val color = ContextCompat.getColor(
                             requireContext(),
@@ -59,10 +59,10 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
             }
         }
         lifecycleScope.launch {
-            viewModel.fragments.collect {
-                pokemonInfoAdapter.setFragments(it)
+            viewModel.fragments.collect { fragments ->
+                pokemonInfoAdapter.setFragments(fragments)
                 TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-                    it.getOrNull(position)?.let {
+                    fragments.getOrNull(position)?.let {
                         tab.setText(it.title)
                     }
                 }.attach()

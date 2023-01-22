@@ -12,9 +12,9 @@ inline fun <ResultType, RequestType> networkBoundResource(
     crossinline query: () -> Flow<ResultType>,
     crossinline fetch: suspend () -> RequestType,
     crossinline saveFetchResult: suspend (RequestType) -> Unit,
-    crossinline onFetchFailed: (Throwable) -> Unit = { Unit },
+    crossinline onFetchFailed: (Throwable) -> Unit = { },
     crossinline shouldFetch: (ResultType) -> Boolean = { true }
-) = flow<ResultType> {
+) = flow {
     val data = query().first()
 
     val flow = if (shouldFetch(data)) {
@@ -38,7 +38,7 @@ inline fun <ResultType, RequestType> offlineBoundResource(
     crossinline query: () -> Flow<ResultType>,
     crossinline fetch: suspend () -> RequestType,
     crossinline saveFetchResult: suspend (RequestType) -> Unit,
-) = flow<ResultType> {
+) = flow {
     emitAll(
         try {
             saveFetchResult(fetch())

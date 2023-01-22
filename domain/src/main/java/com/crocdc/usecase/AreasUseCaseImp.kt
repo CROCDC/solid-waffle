@@ -20,16 +20,16 @@ class AreasUseCaseImp @Inject constructor(
     private val networkStatusTracker: NetworkStatusTracker
 ) : AreasUseCase {
 
-    override fun invoke(name: Flow<String?>): Flow<List<Area>> = name.flatMapLatest {
-        it?.let {
+    override fun invoke(name: Flow<String?>): Flow<List<Area>> = name.flatMapLatest { it ->
+        it?.let { name ->
             networkStatusTracker.networkStatus.flatMapLatest(
                 onAvailable = {
-                    encountersRepository.getEncounters(it).map {
+                    encountersRepository.getEncounters(name).map {
                         it?.let { AreaMapper.transform(it) } ?: emptyList()
                     }
                 },
                 onUnavailable = {
-                    offlineEncountersRepository.getEncounters(it).map {
+                    offlineEncountersRepository.getEncounters(name).map {
                         it?.let { AreaMapper.transform(it) } ?: emptyList()
                     }
                 }

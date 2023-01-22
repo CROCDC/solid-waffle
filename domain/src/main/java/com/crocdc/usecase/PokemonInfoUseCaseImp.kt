@@ -19,16 +19,16 @@ class PokemonInfoUseCaseImp @Inject constructor(
     private val offlinePokemonRepository: OfflinePokemonRepository,
     private val networkStatusTracker: NetworkStatusTracker
 ) : PokemonInfoUseCase {
-    override operator fun invoke(name: Flow<String?>): Flow<PokemonInfo?> = name.flatMapLatest {
-        it?.let {
+    override operator fun invoke(name: Flow<String?>): Flow<PokemonInfo?> = name.flatMapLatest { it ->
+        it?.let { name ->
             networkStatusTracker.networkStatus.flatMapLatest(
                 onUnavailable = {
-                    offlinePokemonRepository.getPokemonInfo(it).map { entity ->
+                    offlinePokemonRepository.getPokemonInfo(name).map { entity ->
                         entity?.let { PokemonInfoMapper.transform(it) }
                     }
                 },
                 onAvailable = {
-                    pokemonRepository.getPokemonInfo(it).map { entity ->
+                    pokemonRepository.getPokemonInfo(name).map { entity ->
                         entity?.let { PokemonInfoMapper.transform(it) }
                     }
                 }

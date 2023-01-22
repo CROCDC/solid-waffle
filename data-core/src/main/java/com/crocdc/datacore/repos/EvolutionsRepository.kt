@@ -14,8 +14,8 @@ class EvolutionsRepository @Inject constructor(
     fun getEvolutions(evolutionChain: String) = networkBoundResource(
         query = { dao.getEvolutionEntity(evolutionChain) },
         fetch = { dataSource.getEvolutions(evolutionChain) },
-        saveFetchResult = {
-            it.data?.let {
+        saveFetchResult = { r ->
+            r.data?.let {
                 dao.save(EvolutionEntityMapper(evolutionChain).transform(it))
             }
         },

@@ -15,11 +15,11 @@ class OfflineEncountersRepository @Inject constructor(
     fun getEncounters(name: String) = offlineBoundResource(
         query = { dao.getEncountersEntity(name) },
         fetch = { dataSource.getEncounters(name) },
-        saveFetchResult = {
+        saveFetchResult = { encounters ->
             dao.save(
                 EncountersEntity(
                     name,
-                    it.map {
+                    encounters.map {
                         Encounter(it.locationArea.name)
                     }
                 )
