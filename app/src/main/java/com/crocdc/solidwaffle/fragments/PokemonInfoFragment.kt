@@ -1,7 +1,6 @@
 package com.crocdc.solidwaffle.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
