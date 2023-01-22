@@ -19,7 +19,8 @@ class EncountersRepository @Inject constructor(
             it.data?.let {
                 dao.save(
                     EncountersEntity(
-                        name, it.map {
+                        name,
+                        it.map {
                             Encounter(
                                 it.locationArea.name
                             )

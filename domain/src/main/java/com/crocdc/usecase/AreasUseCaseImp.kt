@@ -34,7 +34,6 @@ class AreasUseCaseImp @Inject constructor(
                     }
                 }
             )
-
         } ?: emptyFlow()
     }
 }

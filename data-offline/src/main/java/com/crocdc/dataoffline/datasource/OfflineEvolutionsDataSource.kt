@@ -7,7 +7,8 @@ import com.squareup.moshi.Moshi
 import javax.inject.Inject
 
 class OfflineEvolutionsDataSource @Inject constructor(
-    private val moshi: Moshi, private val assetManager: AssetManager
+    private val moshi: Moshi,
+    private val assetManager: AssetManager
 ) : OfflineEvolutionsDataSourceProvider {
 
     override fun getEvolutions(evolutionChain: String): EvolutionResponse? =

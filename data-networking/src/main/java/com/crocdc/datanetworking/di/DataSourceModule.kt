@@ -36,5 +36,4 @@ abstract class DataSourceModule {
     abstract fun bindEncountersDataSource(
         dataSource: EncountersDataSource
     ): EncountersDataSourceProvider
-
 }

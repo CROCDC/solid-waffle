@@ -4,7 +4,9 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'io.gitlab.arturbosch.detekt'
 }
+apply from: '../detekt.gradle'
 
 android {
     namespace 'com.crocdc.solidwaffle'

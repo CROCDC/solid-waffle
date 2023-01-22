@@ -15,7 +15,6 @@ class Converters {
 
     @TypeConverter
     fun saveTypes(types: List<Type>): String {
-
         val type = Types.newParameterizedType(List::class.java, Type::class.java)
         return moshi.adapter<List<Type>>(type).toJson(types)
     }

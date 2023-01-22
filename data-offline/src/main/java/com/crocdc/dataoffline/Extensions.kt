@@ -1,9 +1,7 @@
 package com.crocdc.dataoffline
 
 import android.content.res.AssetManager
-import com.crocdc.modelnetworking.PokemonsResponse
 import java.io.IOException
-import java.io.InputStream
 
 fun AssetManager.openJson(fileName: String) = try {
     val file = open(fileName)

@@ -10,7 +10,8 @@ import okhttp3.Request
 import javax.inject.Inject
 
 class PokemonSpeciesDataSource @Inject constructor(
-    private val okHttpClient: OkHttpClient, private val moshi: Moshi
+    private val okHttpClient: OkHttpClient,
+    private val moshi: Moshi
 ) : PokemonSpeciesDataSourceProvider {
 
     private val request: HttpUrl.Builder = HttpUrl.Builder()

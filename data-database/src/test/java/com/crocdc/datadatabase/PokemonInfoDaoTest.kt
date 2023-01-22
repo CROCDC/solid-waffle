@@ -52,7 +52,8 @@ class PokemonInfoDaoTest {
                 listOf(Type("water")),
                 listOf(
                     Move(
-                        "tackle", listOf(
+                        "tackle",
+                        listOf(
                             LearnedAt(
                                 20,
                                 "LEVEL"

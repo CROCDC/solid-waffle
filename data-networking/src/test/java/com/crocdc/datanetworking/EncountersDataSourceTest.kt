@@ -13,7 +13,7 @@ class EncountersDataSourceTest {
     )
 
     @Test
-    fun getEncounters(){
+    fun getEncounters() {
         dataSource.getEncounters("squirtle").assert()
     }
 }

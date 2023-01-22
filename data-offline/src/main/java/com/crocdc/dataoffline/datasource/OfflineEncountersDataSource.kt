@@ -8,7 +8,8 @@ import com.squareup.moshi.Types
 import javax.inject.Inject
 
 class OfflineEncountersDataSource @Inject constructor(
-    private val moshi: Moshi, private val assetManager: AssetManager
+    private val moshi: Moshi,
+    private val assetManager: AssetManager
 ) : OfflineEncountersDataSourceProvider {
 
     override fun getEncounters(name: String): List<Encounter> =

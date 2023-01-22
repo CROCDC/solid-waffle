@@ -33,7 +33,6 @@ class PokemonInfoUseCaseImp @Inject constructor(
                     }
                 }
             )
-
         } ?: emptyFlow()
     }
 }
