@@ -12,11 +12,13 @@ import com.crocdc.datadatabase.model.PokemonInfoEntity
 import com.crocdc.datadatabase.model.Type
 import com.crocdc.datanetworking.datasource.PokemonDataSourceProvider
 import com.crocdc.dataoffline.OfflinePokemonDataSource
+import com.crocdc.modelnetworking.PokemonInfo
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class OfflinePokemonRepository @Inject constructor(
     private val pokemonDao: PokemonDao,
+    private val pokemonInfo: PokemonInfoDao,
     private val dataSource: OfflinePokemonDataSource
 ) {
 
@@ -41,6 +43,41 @@ class OfflinePokemonRepository @Inject constructor(
                     )
                 }.orEmpty()
             )
+        }
+    )
+
+    fun getPokemonInfo(name: String): Flow<PokemonInfoEntity?> = offlineBoundResource(
+        query = {
+            pokemonInfo.getPokemonInfoEntity(name)
+        },
+        fetch = {
+            dataSource.getPokemonInfo(name)
+        },
+        saveFetchResult = { r ->
+            r?.let {
+                pokemonInfo.save(
+                    PokemonInfoEntity(
+                        it.name,
+                        it.types.map { Type(it.type.name) },
+                        it.moves.map {
+                            Move(
+                                it.move.name,
+                                it.versionGroupDetails.map {
+                                    LearnedAt(
+                                        it.levelLearnedAt,
+                                        it.moveLearnMethod.name
+                                    )
+                                }
+                            )
+                        },
+                        it.abilities.map { Ability(it.ability.name, it.isHidden) },
+                        it.locationAreaEncounters,
+                        it.sprites.other.officialArtwork.frontDefault,
+                        it.sprites.other.officialArtwork.frontShiny,
+                        it.sprites.frontDefault
+                    )
+                )
+            }
         }
     )
 }
