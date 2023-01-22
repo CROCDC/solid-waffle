@@ -25,7 +25,6 @@ inline fun <ResultType, RequestType> networkBoundResource(
             saveFetchResult(fetch())
             query()
         } catch (throwable: Throwable) {
-            Log.e("CROCDC", throwable.toString())
             onFetchFailed(throwable)
             query()
         }
