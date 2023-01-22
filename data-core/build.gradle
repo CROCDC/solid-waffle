@@ -32,9 +32,10 @@ android {
 }
 
 dependencies {
-    // TODO investigar esto
     api project(':data-database')
     implementation project(':data-networking')
+    implementation project(':data-offline')
+    implementation project(':model-networking')
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

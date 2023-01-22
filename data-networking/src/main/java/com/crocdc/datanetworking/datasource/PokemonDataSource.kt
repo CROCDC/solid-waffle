@@ -1,9 +1,9 @@
 package com.crocdc.datanetworking.datasource
 
 import com.crocdc.datanetworking.BuildConfig
-import com.crocdc.datanetworking.Resource
-import com.crocdc.datanetworking.model.PokemonInfo
-import com.crocdc.datanetworking.model.PokemonsResponse
+import com.crocdc.modelnetworking.Resource
+import com.crocdc.modelnetworking.PokemonInfo
+import com.crocdc.modelnetworking.PokemonsResponse
 import com.squareup.moshi.Moshi
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
@@ -27,7 +27,10 @@ class PokemonDataSource @Inject constructor(
             okHttpClient.newCall(Request.Builder().url(request.build()).build()).execute()
         val json = response.body?.source()
         return if (response.code == 200 && json != null) {
-            Resource.success(moshi.adapter(PokemonsResponse::class.java).fromJson(json))
+            Resource.success(
+                moshi.adapter(PokemonsResponse::class.java)
+                    .fromJson(json)
+            )
         } else {
             Resource.error()
         }
@@ -40,7 +43,9 @@ class PokemonDataSource @Inject constructor(
             okHttpClient.newCall(Request.Builder().url(request.build()).build()).execute()
         val json = response.body?.source()
         return if (response.code == 200 && json != null) {
-            Resource.success(moshi.adapter(PokemonInfo::class.java).fromJson(json))
+            Resource.success(
+                moshi.adapter(PokemonInfo::class.java).fromJson(json)
+            )
         } else {
             Resource.error()
         }

@@ -33,3 +33,18 @@ inline fun <ResultType, RequestType> networkBoundResource(
 
     emitAll(flow)
 }.flowOn(Dispatchers.IO)
+
+inline fun <ResultType, RequestType> offlineBoundResource(
+    crossinline query: () -> Flow<ResultType>,
+    crossinline fetch: suspend () -> RequestType,
+    crossinline saveFetchResult: suspend (RequestType) -> Unit,
+) = flow<ResultType> {
+    emitAll(
+        try {
+            saveFetchResult(fetch())
+            query()
+        } catch (throwable: Throwable) {
+            query()
+        }
+    )
+}.flowOn(Dispatchers.IO)

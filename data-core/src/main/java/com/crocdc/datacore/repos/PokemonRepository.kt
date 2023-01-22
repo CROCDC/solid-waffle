@@ -31,6 +31,7 @@ class PokemonRepository @Inject constructor(
             dataSource.getPokemonsListing()
         },
         saveFetchResult = { r ->
+            pokemonDao.deleteAll()
             pokemonDao.saveAll(
                 r.data?.results?.map { listing ->
                     PokemonEntity(
@@ -40,7 +41,10 @@ class PokemonRepository @Inject constructor(
                 }.orEmpty()
             )
         },
-        shouldFetch = { it.isEmpty() }
+        shouldFetch = {
+            // TODO
+            it.size < 3
+        }
     )
 
     fun getPokemonInfo(name: String): Flow<PokemonInfoEntity?> = networkBoundResource(

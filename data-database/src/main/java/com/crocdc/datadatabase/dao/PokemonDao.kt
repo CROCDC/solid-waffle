@@ -18,4 +18,7 @@ interface PokemonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveAll(products: List<PokemonEntity>)
+
+    @Query("DELETE FROM PokemonEntity")
+    fun deleteAll()
 }

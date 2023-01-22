@@ -1,8 +1,8 @@
 package com.crocdc.datanetworking.datasource
 
 import com.crocdc.datanetworking.BuildConfig
-import com.crocdc.datanetworking.Resource
-import com.crocdc.datanetworking.model.Encounter
+import com.crocdc.modelnetworking.Resource
+import com.crocdc.modelnetworking.Encounter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import okhttp3.HttpUrl

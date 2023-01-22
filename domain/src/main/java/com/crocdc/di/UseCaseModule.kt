@@ -3,13 +3,13 @@ package com.crocdc.di
 import com.crocdc.usecase.AbilitiesUseCase
 import com.crocdc.usecase.AbilitiesUseCaseImp
 import com.crocdc.usecase.AreasUseCase
-import com.crocdc.delegate.AreasUseCaseImp
+import com.crocdc.usecase.AreasUseCaseImp
 import com.crocdc.usecase.EvolutionsUseCase
-import com.crocdc.delegate.EvolutionsUseCaseImp
+import com.crocdc.usecase.EvolutionsUseCaseImp
 import com.crocdc.usecase.MovesUseCase
 import com.crocdc.usecase.MovesUseCaseImp
 import com.crocdc.usecase.PokemonInfoUseCase
-import com.crocdc.delegate.PokemonInfoUseCaseImp
+import com.crocdc.usecase.PokemonInfoUseCaseImp
 import com.crocdc.usecase.PokemonListingUseCase
 import com.crocdc.usecase.PokemonListingUseCaseImp
 import dagger.Binds

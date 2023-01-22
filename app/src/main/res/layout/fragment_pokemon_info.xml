@@ -99,6 +99,7 @@
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
+                    app:tabMode="auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"

@@ -1,7 +1,7 @@
 package com.crocdc.datanetworking.datasource
 
-import com.crocdc.datanetworking.Resource
-import com.crocdc.datanetworking.model.Encounter
+import com.crocdc.modelnetworking.Resource
+import com.crocdc.modelnetworking.Encounter
 
 interface EncountersDataSourceProvider {
     fun getEncounters(name: String): Resource<List<Encounter>>
