@@ -5,7 +5,9 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.adapter.AreaAdapter
 import com.crocdc.solidwaffle.databinding.FragmentAreasBinding
@@ -27,7 +29,9 @@ class AreasFragment : Fragment(R.layout.fragment_areas) {
         val adapter = AreaAdapter()
         binding.recycler.adapter = adapter
         lifecycleScope.launch {
-            viewModel.areas.collect { adapter.submitList(it) }
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.areas.collect { adapter.submitList(it) }
+            }
         }
     }
 }

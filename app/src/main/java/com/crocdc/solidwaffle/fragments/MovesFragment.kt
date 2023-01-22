@@ -5,7 +5,9 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.adapter.MoveAdapter
 import com.crocdc.solidwaffle.databinding.FragmentMovesBinding
@@ -27,7 +29,9 @@ class MovesFragment : Fragment(R.layout.fragment_moves) {
         binding.recycler.adapter = adapter
         lifecycleScope.launch {
             viewModel.setName(checkNotNull(requireArguments().getString(ARG_NAME)))
-            viewModel.moves.collect { adapter.submitList(it) }
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.moves.collect { adapter.submitList(it) }
+            }
         }
     }
 

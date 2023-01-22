@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.adapter.EvolutionAdapter
 import com.crocdc.solidwaffle.databinding.FragmentEvolutionsBinding
@@ -25,7 +27,11 @@ class EvolutionsFragment : Fragment(R.layout.fragment_evolutions) {
         val adapter = EvolutionAdapter()
         binding.recycler.adapter = adapter
         lifecycleScope.launch {
-            viewModel.evolutions.collect { adapter.submitList(it) }
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.evolutions.collect {
+                    adapter.submitList(it)
+                }
+            }
         }
     }
 }

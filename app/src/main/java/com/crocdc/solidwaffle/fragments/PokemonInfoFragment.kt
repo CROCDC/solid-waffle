@@ -6,7 +6,9 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.adapter.PokemonInfoAdapter
@@ -44,43 +46,49 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         }
         lifecycleScope.launch {
             viewModel.setName(args.name)
-            viewModel.pokemonInfo.collect { info ->
-                typeAdapter.submitList(info?.types)
-                info?.let { it ->
-                    it.types.getOrNull(0)?.getColor()?.let {
-                        val color = ContextCompat.getColor(
-                            requireContext(),
-                            it
-                        )
-                        binding.collapsing.setBackgroundColor(color)
-                        binding.tabLayout.setSelectedTabIndicatorColor(color)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.pokemonInfo.collect { info ->
+                    typeAdapter.submitList(info?.types)
+                    info?.let { it ->
+                        it.types.getOrNull(0)?.getColor()?.let {
+                            val color = ContextCompat.getColor(
+                                requireContext(),
+                                it
+                            )
+                            binding.collapsing.setBackgroundColor(color)
+                            binding.tabLayout.setSelectedTabIndicatorColor(color)
+                        }
                     }
                 }
             }
         }
         lifecycleScope.launch {
-            viewModel.fragments.collect { fragments ->
-                pokemonInfoAdapter.setFragments(fragments)
-                TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-                    fragments.getOrNull(position)?.let {
-                        tab.setText(it.title)
-                    }
-                }.attach()
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.fragments.collect { fragments ->
+                    pokemonInfoAdapter.setFragments(fragments)
+                    TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+                        fragments.getOrNull(position)?.let {
+                            tab.setText(it.title)
+                        }
+                    }.attach()
+                }
             }
         }
         lifecycleScope.launch {
-            viewModel.imageOptions.collect { images ->
-                binding.imgSelectImage.setOnClickListener {
-                    val popupMenu = PopupMenu(it.context, it)
-                    images.forEachIndexed { index, imageOption ->
-                        popupMenu.menu.add(index, index, index, getString(imageOption.title))
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.imageOptions.collect { images ->
+                    binding.imgSelectImage.setOnClickListener {
+                        val popupMenu = PopupMenu(it.context, it)
+                        images.forEachIndexed { index, imageOption ->
+                            popupMenu.menu.add(index, index, index, getString(imageOption.title))
+                        }
+                        popupMenu.menuInflater.inflate(R.menu.select_image_menu, popupMenu.menu)
+                        popupMenu.setOnMenuItemClickListener { menuItem ->
+                            lifecycleScope.launch { viewModel.setSelectedImage(images[menuItem.order]) }
+                            true
+                        }
+                        popupMenu.show()
                     }
-                    popupMenu.menuInflater.inflate(R.menu.select_image_menu, popupMenu.menu)
-                    popupMenu.setOnMenuItemClickListener { menuItem ->
-                        lifecycleScope.launch { viewModel.setSelectedImage(images[menuItem.order]) }
-                        true
-                    }
-                    popupMenu.show()
                 }
             }
         }
