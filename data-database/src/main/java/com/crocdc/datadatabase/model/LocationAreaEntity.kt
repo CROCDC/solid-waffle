@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity
 data class LocationAreaEntity(
     @PrimaryKey val id: String,
-    val name: String,
+    val name: String?,
     val pokemonEncounters: List<PokemonEncounter>
 )
