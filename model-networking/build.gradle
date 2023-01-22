@@ -11,5 +11,5 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_7
 }
 dependencies {
-    implementation "com.squareup.moshi:moshi-kotlin:1.9.1"
+    implementation(libs.moshi)
 }
