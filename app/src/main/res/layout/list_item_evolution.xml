@@ -25,6 +25,7 @@
                     android:layout_margin="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
                     tools:src="@drawable/ic_dark" />
 
                 <TextView
@@ -41,7 +42,6 @@
                     app:layout_constraintTop_toBottomOf="@id/img_from"
                     tools:text="Squirtle" />
 
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,7 +49,8 @@
                     app:layout_constraintBottom_toBottomOf="@id/view_line_arrow"
                     app:layout_constraintEnd_toEndOf="@id/view_line_arrow"
                     app:layout_constraintStart_toEndOf="@id/view_line_arrow"
-                    app:layout_constraintTop_toTopOf="@id/view_line_arrow" />
+                    app:layout_constraintTop_toTopOf="@id/view_line_arrow"
+                    tools:ignore="ContentDescription" />
 
                 <View
                     android:id="@+id/view_line_arrow"
@@ -67,6 +68,7 @@
                     android:layout_height="96dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
                     tools:src="@drawable/ic_dark" />
 
                 <TextView

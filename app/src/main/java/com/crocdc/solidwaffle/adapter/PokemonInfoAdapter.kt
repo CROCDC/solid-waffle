@@ -1,5 +1,6 @@
 package com.crocdc.solidwaffle.adapter
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.crocdc.solidwaffle.fragments.AbilitiesFragment
@@ -14,6 +15,7 @@ class PokemonInfoAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = fragments.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setFragments(list: List<ViewPagerFragment>) {
         fragments = list
         notifyDataSetChanged()

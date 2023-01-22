@@ -15,7 +15,7 @@
     <color name="dragon">#076DC0</color>
     <color name="electric">#F4D556</color>
     <color name="fairy">#F294E9</color>
-    <color name="figth">#D4445D</color>
+    <color name="fight">#D4445D</color>
     <color name="fliying">#9DB5E4</color>
     <color name="ghost">#656CC6</color>
     <color name="grass">#64B954</color>
@@ -27,6 +27,5 @@
     <color name="rock">#CBC194</color>
     <color name="steel">#5094A1</color>
     <color name="gray_DFDFDF">#DFDFDF</color>
-    <color name="gray_EDEDED">#EDEDED</color>
     <color name="gray_666666">#666666</color>
 </resources>

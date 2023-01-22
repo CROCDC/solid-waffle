@@ -18,30 +18,19 @@
             app:cardCornerRadius="20dp"
             app:cardElevation="4dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/txt_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:drawablePadding="15dp"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                tools:drawableStartCompat="@drawable/ic_fire"
+                tools:text="Fire" />
 
-                <ImageView
-                    android:id="@+id/img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    tools:src="@drawable/ic_fire" />
-
-                <TextView
-                    android:id="@+id/txt_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="30dp"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    tools:text="Fire" />
-
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
     </FrameLayout>
 </layout>

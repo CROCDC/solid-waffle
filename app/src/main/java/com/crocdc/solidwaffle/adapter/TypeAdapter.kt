@@ -33,7 +33,12 @@ class TypeAdapter : ListAdapter<Type, TypeAdapter.ViewHolder>(DiffUtilCallback) 
         fun bind(type: Type) {
             binding.txtName.text = type.name
             type.getIcon()?.let {
-                binding.img.setImageResource(it)
+                binding.txtName.setCompoundDrawablesWithIntrinsicBounds(
+                    it,
+                    0,
+                    0,
+                    0
+                )
             }
             type.getColor()?.let {
                 binding.card.setCardBackgroundColor(ContextCompat.getColor(itemView.context, it))

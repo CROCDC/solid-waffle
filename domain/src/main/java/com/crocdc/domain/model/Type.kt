@@ -17,5 +17,6 @@ enum class Type {
     ICE,
     GROUND,
     STEEL,
-    BUG
+    BUG,
+    FIGHTING
 }

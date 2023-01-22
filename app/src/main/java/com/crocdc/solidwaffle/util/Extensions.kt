@@ -21,6 +21,7 @@ fun Type.getColor() = when (this) {
     Type.GROUND -> R.color.ground
     Type.STEEL -> R.color.steel
     Type.BUG -> R.color.bug
+    Type.FIGHTING -> R.color.fight
     else -> null
 }
 
@@ -42,5 +43,6 @@ fun Type.getIcon() = when (this) {
     Type.GROUND -> R.drawable.ic_ground
     Type.STEEL -> R.drawable.ic_steel
     Type.BUG -> R.drawable.ic_bug
+    Type.FIGHTING -> R.drawable.ic_fight
     else -> null
 }
