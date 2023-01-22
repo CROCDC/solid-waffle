@@ -54,6 +54,7 @@ class PokemonRepository @Inject constructor(
             r.data?.let {
                 pokemonInfoDao.save(PokemonInfoEntityMapper.transform(it))
             }
-        }
+        },
+        shouldFetch = { it == null }
     )
 }

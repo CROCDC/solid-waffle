@@ -3,6 +3,7 @@ package com.crocdc.solidwaffle.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import com.crocdc.domain.model.FromEvolutionTo
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.databinding.ListItemEvolutionBinding
 import com.crocdc.solidwaffle.fetchImage
+import com.crocdc.solidwaffle.fragments.PokemonInfoFragmentDirections
 
 class EvolutionAdapter : ListAdapter<FromEvolutionTo, EvolutionAdapter.ViewHolder>(DiffCallback) {
 
@@ -42,6 +44,18 @@ class EvolutionAdapter : ListAdapter<FromEvolutionTo, EvolutionAdapter.ViewHolde
             }
             binding.txtFrom.text = fromEvolutionTo.from.name
             binding.txtTo.text = fromEvolutionTo.to.name
+            binding.imgFrom.setOnClickListener {
+                navigate(fromEvolutionTo.from.name)
+            }
+            binding.imgTo.setOnClickListener {
+                navigate(fromEvolutionTo.to.name)
+            }
+        }
+
+        private fun navigate(name: String) {
+            itemView.findNavController().navigate(
+                PokemonInfoFragmentDirections.actionPokemonInfoFragmentSelf(name)
+            )
         }
     }
 

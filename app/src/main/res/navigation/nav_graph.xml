@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_pokemonInfoFragment_to_locationAreaFragment"
             app:destination="@id/locationAreaFragment" />
+        <action
+            android:id="@+id/action_pokemonInfoFragment_self"
+            app:destination="@id/pokemonInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/locationAreaFragment"

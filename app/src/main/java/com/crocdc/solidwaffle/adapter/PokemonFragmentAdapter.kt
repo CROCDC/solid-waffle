@@ -29,4 +29,9 @@ class PokemonFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment
             is ViewPagerFragment.Abilities -> AbilitiesFragment.newInstance(fragment.name)
             null -> throw UnsupportedOperationException()
         }
+
+    override fun containsItem(itemId: Long): Boolean =
+        fragments.any { it.javaClass.hashCode().toLong() == itemId }
+
+    override fun getItemId(position: Int): Long = fragments[position].javaClass.hashCode().toLong()
 }
