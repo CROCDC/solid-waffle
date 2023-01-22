@@ -1,9 +1,13 @@
 package com.crocdc.usecase
 
 import com.crocdc.datacore.repos.EvolutionsRepository
+import com.crocdc.datacore.repos.OfflineEvolutionsRepository
+import com.crocdc.datacore.repos.OfflinePokemonSpecieRepository
 import com.crocdc.datacore.repos.PokemonSpecieRepository
 import com.crocdc.domain.model.FromEvolutionTo
-import com.crocdc.domain.model.Pokemon
+import com.crocdc.mapper.FromEvolutionToMapper
+import com.crocdc.util.NetworkStatusTracker
+import com.crocdc.util.flatMapLatest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -14,45 +18,38 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 class EvolutionsUseCaseImp @Inject constructor(
     private val evolutionsRepository: EvolutionsRepository,
-    private val pokemonSpecieRepository: PokemonSpecieRepository
+    private val offlineEvolutionsRepository: OfflineEvolutionsRepository,
+    private val pokemonSpecieRepository: PokemonSpecieRepository,
+    private val offlinePokemonSpecieRepository: OfflinePokemonSpecieRepository,
+    private val networkStatusTracker: NetworkStatusTracker
 ) : EvolutionsUseCase {
     override fun invoke(name: Flow<String?>): Flow<List<FromEvolutionTo>> = name.flatMapLatest {
         it?.let {
-            pokemonSpecieRepository.getPokemonSpecie(it).flatMapLatest { specie ->
-                specie?.let {
-                    evolutionsRepository.getEvolutions(specie.evolutionChain).mapLatest {
-                        it?.let { entity ->
-                            val second = it.evolvesTo.evolvesTo?.let {
-                                FromEvolutionTo(
-                                    Pokemon(
-                                        entity.evolvesTo.pokemonEvolution.name,
-                                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entity.evolvesTo.pokemonEvolution.id}.png"
-                                    ),
-                                    it.minLevel,
-                                    Pokemon(
-                                        it.pokemonEvolution.name,
-                                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${it.pokemonEvolution.id}.png"
-
-                                    )
-                                )
+            networkStatusTracker.networkStatus.flatMapLatest(
+                onAvailable = {
+                    pokemonSpecieRepository.getPokemonSpecie(it).flatMapLatest { specie ->
+                        specie?.let {
+                            evolutionsRepository.getEvolutions(specie.evolutionChain).mapLatest {
+                                it?.let { entity ->
+                                    FromEvolutionToMapper.transform(entity)
+                                } ?: emptyList()
                             }
-                            listOf(
-                                FromEvolutionTo(
-                                    Pokemon(
-                                        entity.basePokemon.name,
-                                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entity.basePokemon.id}.png"
-                                    ),
-                                    entity.evolvesTo.minLevel,
-                                    Pokemon(
-                                        entity.evolvesTo.pokemonEvolution.name,
-                                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entity.evolvesTo.pokemonEvolution.id}.png"
-                                    )
-                                )
-                            ).plus(second).filterNotNull()
-                        } ?: emptyList()
+                        } ?: emptyFlow()
                     }
-                } ?: emptyFlow()
-            }
+                },
+                onUnavailable = {
+                    offlinePokemonSpecieRepository.getPokemonSpecie(it).flatMapLatest { specie ->
+                        specie?.let {
+                            offlineEvolutionsRepository.getEvolutions(specie.evolutionChain)
+                                .mapLatest {
+                                    it?.let { entity ->
+                                        FromEvolutionToMapper.transform(entity)
+                                    } ?: emptyList()
+                                }
+                        } ?: emptyFlow()
+                    }
+                }
+            )
         } ?: emptyFlow()
     }
 }

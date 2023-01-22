@@ -1,10 +1,10 @@
-package com.crocdc.dataoffline
+package com.crocdc.dataoffline.datasource
 
 import android.content.res.AssetManager
+import com.crocdc.dataoffline.openJson
 import com.crocdc.modelnetworking.PokemonInfo
 import com.crocdc.modelnetworking.PokemonsResponse
 import com.squareup.moshi.Moshi
-import java.io.IOException
 import javax.inject.Inject
 
 class OfflinePokemonDataSource @Inject constructor(

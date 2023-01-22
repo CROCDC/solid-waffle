@@ -1,6 +1,5 @@
 package com.crocdc.datacore.repos
 
-import com.crocdc.datacore.networkBoundResource
 import com.crocdc.datacore.offlineBoundResource
 import com.crocdc.datadatabase.dao.PokemonDao
 import com.crocdc.datadatabase.dao.PokemonInfoDao
@@ -10,16 +9,14 @@ import com.crocdc.datadatabase.model.Move
 import com.crocdc.datadatabase.model.PokemonEntity
 import com.crocdc.datadatabase.model.PokemonInfoEntity
 import com.crocdc.datadatabase.model.Type
-import com.crocdc.datanetworking.datasource.PokemonDataSourceProvider
-import com.crocdc.dataoffline.OfflinePokemonDataSource
-import com.crocdc.modelnetworking.PokemonInfo
+import com.crocdc.dataoffline.datasource.OfflinePokemonDataSourceProvider
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class OfflinePokemonRepository @Inject constructor(
     private val pokemonDao: PokemonDao,
     private val pokemonInfo: PokemonInfoDao,
-    private val dataSource: OfflinePokemonDataSource
+    private val dataSource: OfflinePokemonDataSourceProvider
 ) {
 
     fun getPokemonsListing(query: String?): Flow<List<PokemonEntity>> = offlineBoundResource(

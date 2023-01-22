@@ -1,8 +1,8 @@
 package com.crocdc.datanetworking.datasource
 
 import com.crocdc.datanetworking.BuildConfig
-import com.crocdc.modelnetworking.Resource
 import com.crocdc.modelnetworking.PokemonsSpeciesResponse
+import com.crocdc.modelnetworking.Resource
 import com.squareup.moshi.Moshi
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
