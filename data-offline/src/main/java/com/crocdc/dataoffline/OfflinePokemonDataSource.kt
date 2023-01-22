@@ -3,17 +3,22 @@ package com.crocdc.dataoffline
 import android.content.res.AssetManager
 import com.crocdc.modelnetworking.PokemonInfo
 import com.crocdc.modelnetworking.PokemonsResponse
-import com.crocdc.modelnetworking.Resource
 import com.squareup.moshi.Moshi
+import java.io.IOException
 import javax.inject.Inject
 
 class OfflinePokemonDataSource @Inject constructor(
-    private val moshi: Moshi
+    private val moshi: Moshi,
+    private val assetManager: AssetManager
 ) : OfflinePokemonDataSourceProvider {
 
     override fun getPokemonsListing(): PokemonsResponse? =
-        moshi.adapter(PokemonsResponse::class.java).fromJson(jsons.pokemons)
+        assetManager.openJson("pokemons.json")?.let {
+            moshi.adapter(PokemonsResponse::class.java).fromJson(it)
+        }
 
     override fun getPokemonInfo(name: String): PokemonInfo? =
-        moshi.adapter(PokemonInfo::class.java).fromJson(jsons.pokemons)
+        assetManager.openJson("$name.json")?.let {
+            moshi.adapter(PokemonInfo::class.java).fromJson(it)
+        }
 }
