@@ -12,6 +12,10 @@ android {
     namespace 'com.crocdc.solidwaffle'
     compileSdk rootProject.ext.compileSdkVersion
 
+    lintOptions {
+        checkAllWarnings true
+        warningsAsErrors true
+    }
     defaultConfig {
         applicationId "com.crocdc.solidwaffle"
         minSdkVersion rootProject.ext.minSdkVersion

@@ -6,6 +6,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
@@ -46,6 +47,7 @@ class NetworkStatusTracker(context: Context) {
         val hasConnection = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             connectivityManager.activeNetwork
         } else {
+            @Suppress("DEPRECATION")
             connectivityManager.activeNetworkInfo
         } != null
 
@@ -57,6 +59,7 @@ class NetworkStatusTracker(context: Context) {
     }
 }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 inline fun <Result> Flow<NetworkStatus>.flatMapLatest(
     crossinline onUnavailable: suspend () -> Flow<Result>,
     crossinline onAvailable: suspend () -> Flow<Result>,
