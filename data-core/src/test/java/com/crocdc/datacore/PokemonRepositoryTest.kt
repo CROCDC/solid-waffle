@@ -33,23 +33,23 @@ class PokemonRepositoryTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun searchShouldFetchTrue() {
-        every { pokemonDao.search(null) } returns flow { emit(emptyList()) }
+        every { pokemonDao.getAll() } returns flow { emit(emptyList()) }
         runTest {
             repository.getPokemonsListing(null).take(4).collect {}
             verify { dataSource.getPokemonsListing() }
-            verify { pokemonDao.search(null) }
+            verify { pokemonDao.getAll() }
         }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun searchShouldFetchFalse() {
-        every { pokemonDao.search(null) } returns flow { emit(listOf(pokemon)) }
+        every { pokemonDao.getAll() } returns flow { emit(listOf(pokemon)) }
 
         runTest {
             repository.getPokemonsListing(null).take(4).collect {}
             verify { dataSource.getPokemonsListing() wasNot Called }
-            verify { pokemonDao.search(null) }
+            verify { pokemonDao.getAll() }
         }
     }
 
