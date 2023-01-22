@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.crocdc.datadatabase.model.Ability
 import com.crocdc.datadatabase.model.Encounter
 import com.crocdc.datadatabase.model.Move
+import com.crocdc.datadatabase.model.PokemonEncounter
 import com.crocdc.datadatabase.model.Type
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -59,5 +60,17 @@ class Converters {
     fun restoreEncounters(encounters: String): List<Encounter>? {
         val type = Types.newParameterizedType(List::class.java, Encounter::class.java)
         return moshi.adapter<List<Encounter>>(type).fromJson(encounters)
+    }
+
+    @TypeConverter
+    fun savePokemonEncounters(pokemonEncounters: List<PokemonEncounter>): String {
+        val type = Types.newParameterizedType(List::class.java, PokemonEncounter::class.java)
+        return moshi.adapter<List<PokemonEncounter>>(type).toJson(pokemonEncounters)
+    }
+
+    @TypeConverter
+    fun restorePokemonEncounters(pokemonEncounters: String): List<PokemonEncounter>? {
+        val type = Types.newParameterizedType(List::class.java, PokemonEncounter::class.java)
+        return moshi.adapter<List<PokemonEncounter>>(type).fromJson(pokemonEncounters)
     }
 }

@@ -1,39 +1,20 @@
 package com.crocdc.datadatabase
 
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
 import com.crocdc.datadatabase.dao.PokemonDao
 import com.crocdc.datadatabase.model.PokemonEntity
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.runTest
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import java.io.IOException
 
 @RunWith(RobolectricTestRunner::class)
-class PokemonDaoTest {
+class PokemonDaoTest : DaoTest() {
 
-    private lateinit var dao: PokemonDao
-    private lateinit var db: PokemonDatabase
-
-    @Before
-    fun createDb() {
-        val context = InstrumentationRegistry.getInstrumentation().context
-        db = Room.inMemoryDatabaseBuilder(
-            context, PokemonDatabase::class.java
-        ).allowMainThreadQueries().build()
-        dao = db.pokemonDao()
-    }
-
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        db.close()
+    private val dao: Lazy<PokemonDao> = lazy {
+        db.pokemonDao()
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -41,8 +22,8 @@ class PokemonDaoTest {
     @Throws(Exception::class)
     fun saveAndSearch() = runTest {
         val productEntity = PokemonEntity("7", "Squirtle")
-        dao.saveAll(listOf(productEntity))
-        dao.search("S").take(1).collect {
+        dao.value.saveAll(listOf(productEntity))
+        dao.value.search("S").take(1).collect {
             assertEquals(productEntity.id, it[0].id)
         }
     }

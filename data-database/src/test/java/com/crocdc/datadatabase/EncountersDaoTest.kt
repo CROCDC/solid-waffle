@@ -1,7 +1,5 @@
 package com.crocdc.datadatabase
 
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
 import com.crocdc.datadatabase.dao.EncountersDao
 import com.crocdc.datadatabase.model.Encounter
 import com.crocdc.datadatabase.model.EncountersEntity
@@ -9,32 +7,15 @@ import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.runTest
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import java.io.IOException
 
 @RunWith(RobolectricTestRunner::class)
-class EncountersDaoTest {
+class EncountersDaoTest : DaoTest() {
 
-    private lateinit var dao: EncountersDao
-    private lateinit var db: PokemonDatabase
-
-    @Before
-    fun createDb() {
-        val context = InstrumentationRegistry.getInstrumentation().context
-        db = Room.inMemoryDatabaseBuilder(
-            context, PokemonDatabase::class.java
-        ).allowMainThreadQueries().build()
-        dao = db.encountersDao()
-    }
-
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        db.close()
+    val dao: Lazy<EncountersDao> = lazy {
+        db.encountersDao()
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -42,8 +23,8 @@ class EncountersDaoTest {
     @Throws(Exception::class)
     fun saveAndGet() = runTest {
         val encounters = EncountersEntity(name, listOf(Encounter("area")))
-        dao.save(encounters)
-        dao.getEncountersEntity(name).take(1).collect {
+        dao.value.save(encounters)
+        dao.value.getEncountersEntity(name).take(1).collect {
             TestCase.assertEquals(name, it?.name)
         }
     }

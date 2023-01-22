@@ -1,7 +1,5 @@
 package com.crocdc.datadatabase
 
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
 import com.crocdc.datadatabase.dao.EvolutionDao
 import com.crocdc.datadatabase.model.EvolutionEntity
 import com.crocdc.datadatabase.model.EvolvesTo
@@ -11,33 +9,15 @@ import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.runTest
-import org.junit.After
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import java.io.IOException
 
 @RunWith(RobolectricTestRunner::class)
-class EvolutionDaoTest {
+class EvolutionDaoTest : DaoTest() {
 
-    private lateinit var dao: EvolutionDao
-    private lateinit var db: PokemonDatabase
-
-    // TODO stop repeating code
-    @Before
-    fun createDb() {
-        val context = InstrumentationRegistry.getInstrumentation().context
-        db = Room.inMemoryDatabaseBuilder(
-            context, PokemonDatabase::class.java
-        ).allowMainThreadQueries().build()
-        dao = db.evolutionDao()
-    }
-
-    @After
-    @Throws(IOException::class)
-    fun closeDb() {
-        db.close()
+    private val dao: Lazy<EvolutionDao> = lazy {
+        db.evolutionDao()
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -60,8 +40,8 @@ class EvolutionDaoTest {
             )
 
         )
-        dao.save(evolutionEntity)
-        dao.getEvolutionEntity(chain).take(1).collect {
+        dao.value.save(evolutionEntity)
+        dao.value.getEvolutionEntity(chain).take(1).collect {
             TestCase.assertEquals(chain, it?.chain)
         }
     }
