@@ -29,7 +29,7 @@ class MovesFragment : Fragment(R.layout.fragment_moves) {
         binding.recycler.adapter = adapter
         lifecycleScope.launch {
             viewModel.setName(checkNotNull(requireArguments().getString(ARG_NAME)))
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.moves.collect { adapter.submitList(it) }
             }
         }

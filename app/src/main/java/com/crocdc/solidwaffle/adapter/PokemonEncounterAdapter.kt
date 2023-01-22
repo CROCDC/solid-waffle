@@ -42,11 +42,13 @@ class PokemonEncounterAdapter :
 
     object DiffCallback : DiffUtil.ItemCallback<PokemonEncounter>() {
         override fun areItemsTheSame(
-            oldItem: PokemonEncounter, newItem: PokemonEncounter
+            oldItem: PokemonEncounter,
+            newItem: PokemonEncounter
         ): Boolean = oldItem.name == newItem.name
 
         override fun areContentsTheSame(
-            oldItem: PokemonEncounter, newItem: PokemonEncounter
+            oldItem: PokemonEncounter,
+            newItem: PokemonEncounter
         ): Boolean = oldItem == newItem
     }
 }

@@ -4,6 +4,8 @@ import com.crocdc.dataoffline.datasource.OfflineEncountersDataSource
 import com.crocdc.dataoffline.datasource.OfflineEncountersDataSourceProvider
 import com.crocdc.dataoffline.datasource.OfflineEvolutionsDataSource
 import com.crocdc.dataoffline.datasource.OfflineEvolutionsDataSourceProvider
+import com.crocdc.dataoffline.datasource.OfflineLocationAreaDataSource
+import com.crocdc.dataoffline.datasource.OfflineLocationAreaDataSourceProvider
 import com.crocdc.dataoffline.datasource.OfflinePokemonDataSource
 import com.crocdc.dataoffline.datasource.OfflinePokemonDataSourceProvider
 import com.crocdc.dataoffline.datasource.OfflinePokemonSpeciesDataSource
@@ -36,4 +38,9 @@ abstract class OfflineDataSourceModule {
     abstract fun bindOfflineEncountersDataSource(
         dataSource: OfflineEncountersDataSource
     ): OfflineEncountersDataSourceProvider
+
+    @Binds
+    abstract fun bindOfflineLocationAreaDataSource(
+        dataSource: OfflineLocationAreaDataSource
+    ): OfflineLocationAreaDataSourceProvider
 }

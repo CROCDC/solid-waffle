@@ -10,8 +10,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
-import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.adapter.PokemonFragmentAdapter
 import com.crocdc.solidwaffle.adapter.TypeAdapter
@@ -42,17 +40,17 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         binding.viewPager.adapter = pokemonFragmentAdapter
 
         lifecycleScope.launch {
-            viewModel.selectedImage.collect { it ->
-                it?.image?.let { binding.img.fetchImage(it) }
+            viewModel.selectedImage.collect { imageOption ->
+                imageOption?.image?.let { binding.img.fetchImage(it) }
             }
         }
         lifecycleScope.launch {
             viewModel.setName(args.name)
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.pokemonInfo.collect { info ->
-                    typeAdapter.submitList(info?.types)
-                    info?.let { it ->
-                        it.types.getOrNull(0)?.getColor()?.let {
+                viewModel.pokemonInfo.collect { pokemonInfo ->
+                    typeAdapter.submitList(pokemonInfo?.types)
+                    pokemonInfo?.let { info ->
+                        info.types.getOrNull(0)?.getColor()?.let {
                             val color = ContextCompat.getColor(
                                 requireContext(),
                                 it

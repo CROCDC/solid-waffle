@@ -1,6 +1,7 @@
 package com.crocdc.usecase
 
 import com.crocdc.datacore.repos.LocationAreaRepository
+import com.crocdc.datacore.repos.OfflineLocationAreaRepository
 import com.crocdc.domain.model.LocationArea
 import com.crocdc.mapper.LocationAreaMapper
 import com.crocdc.util.NetworkStatusTracker
@@ -9,14 +10,14 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class LocationAreaUseCaseImp @Inject constructor(
     private val networkStatusTracker: NetworkStatusTracker,
-    private val locationAreaRepository: LocationAreaRepository
+    private val locationAreaRepository: LocationAreaRepository,
+    private val offlineLocationAreaRepository: OfflineLocationAreaRepository
 ) : LocationAreaUseCase {
 
     override fun invoke(id: Flow<String?>): Flow<LocationArea?> =
@@ -29,8 +30,8 @@ class LocationAreaUseCaseImp @Inject constructor(
                         }
                     },
                     onUnavailable = {
-                        flow {
-
+                        offlineLocationAreaRepository.getLocationArea(idLet).map {
+                            it?.let { LocationAreaMapper.transform(it) }
                         }
                     }
                 )

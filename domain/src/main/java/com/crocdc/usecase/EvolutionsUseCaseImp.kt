@@ -24,8 +24,8 @@ class EvolutionsUseCaseImp @Inject constructor(
     private val networkStatusTracker: NetworkStatusTracker
 ) : EvolutionsUseCase {
     override fun invoke(name: Flow<String?>): Flow<List<FromEvolutionTo>> =
-        name.flatMapLatest { it ->
-            it?.let { name ->
+        name.flatMapLatest { s ->
+            s?.let { name ->
                 networkStatusTracker.networkStatus.flatMapLatest(
                     onAvailable = {
                         pokemonSpecieRepository.getPokemonSpecie(name).flatMapLatest { specie ->

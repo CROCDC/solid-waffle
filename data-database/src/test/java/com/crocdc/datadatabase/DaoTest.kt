@@ -4,11 +4,9 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
 import org.junit.Before
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import java.io.IOException
 
-abstract class DaoTest {
+class DaoTest {
 
     lateinit var db: PokemonDatabase
 

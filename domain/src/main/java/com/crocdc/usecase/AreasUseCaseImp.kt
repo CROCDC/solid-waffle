@@ -20,8 +20,8 @@ class AreasUseCaseImp @Inject constructor(
     private val networkStatusTracker: NetworkStatusTracker
 ) : AreasUseCase {
 
-    override fun invoke(name: Flow<String?>): Flow<List<Area>> = name.flatMapLatest { it ->
-        it?.let { name ->
+    override fun invoke(name: Flow<String?>): Flow<List<Area>> = name.flatMapLatest { s ->
+        s?.let { name ->
             networkStatusTracker.networkStatus.flatMapLatest(
                 onAvailable = {
                     encountersRepository.getEncounters(name).map {

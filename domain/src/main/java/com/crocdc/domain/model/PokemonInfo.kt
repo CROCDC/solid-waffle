@@ -7,4 +7,4 @@ class PokemonInfo(
     val types: List<Type>,
     val abilities: List<Ability>,
     val pokemonMoves: List<PokemonMove>,
-    )
+)

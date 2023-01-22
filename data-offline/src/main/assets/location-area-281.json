@@ -1,0 +1,193 @@
+{
+  "encounter_method_rates": [
+    {
+      "encounter_method": {
+        "name": "old-rod",
+        "url": "https://pokeapi.co/api/v2/encounter-method/2/"
+      },
+      "version_details": [
+        {
+          "rate": 10,
+          "version": {
+            "name": "firered",
+            "url": "https://pokeapi.co/api/v2/version/10/"
+          }
+        },
+        {
+          "rate": 10,
+          "version": {
+            "name": "leafgreen",
+            "url": "https://pokeapi.co/api/v2/version/11/"
+          }
+        },
+        {
+          "rate": 25,
+          "version": {
+            "name": "heartgold",
+            "url": "https://pokeapi.co/api/v2/version/15/"
+          }
+        },
+        {
+          "rate": 25,
+          "version": {
+            "name": "soulsilver",
+            "url": "https://pokeapi.co/api/v2/version/16/"
+          }
+        }
+      ]
+    },
+    {
+      "encounter_method": {
+        "name": "good-rod",
+        "url": "https://pokeapi.co/api/v2/encounter-method/3/"
+      },
+      "version_details": [
+        {
+          "rate": 10,
+          "version": {
+            "name": "firered",
+            "url": "https://pokeapi.co/api/v2/version/10/"
+          }
+        },
+        {
+          "rate": 10,
+          "version": {
+            "name": "leafgreen",
+            "url": "https://pokeapi.co/api/v2/version/11/"
+          }
+        },
+        {
+          "rate": 50,
+          "version": {
+            "name": "heartgold",
+            "url": "https://pokeapi.co/api/v2/version/15/"
+          }
+        },
+        {
+          "rate": 50,
+          "version": {
+            "name": "soulsilver",
+            "url": "https://pokeapi.co/api/v2/version/16/"
+          }
+        }
+      ]
+    },
+    {
+      "encounter_method": {
+        "name": "super-rod",
+        "url": "https://pokeapi.co/api/v2/encounter-method/4/"
+      },
+      "version_details": [
+        {
+          "rate": 10,
+          "version": {
+            "name": "firered",
+            "url": "https://pokeapi.co/api/v2/version/10/"
+          }
+        },
+        {
+          "rate": 10,
+          "version": {
+            "name": "leafgreen",
+            "url": "https://pokeapi.co/api/v2/version/11/"
+          }
+        },
+        {
+          "rate": 75,
+          "version": {
+            "name": "heartgold",
+            "url": "https://pokeapi.co/api/v2/version/15/"
+          }
+        },
+        {
+          "rate": 75,
+          "version": {
+            "name": "soulsilver",
+            "url": "https://pokeapi.co/api/v2/version/16/"
+          }
+        }
+      ]
+    },
+    {
+      "encounter_method": {
+        "name": "surf",
+        "url": "https://pokeapi.co/api/v2/encounter-method/5/"
+      },
+      "version_details": [
+        {
+          "rate": 1,
+          "version": {
+            "name": "firered",
+            "url": "https://pokeapi.co/api/v2/version/10/"
+          }
+        },
+        {
+          "rate": 1,
+          "version": {
+            "name": "leafgreen",
+            "url": "https://pokeapi.co/api/v2/version/11/"
+          }
+        },
+        {
+          "rate": 10,
+          "version": {
+            "name": "heartgold",
+            "url": "https://pokeapi.co/api/v2/version/15/"
+          }
+        },
+        {
+          "rate": 10,
+          "version": {
+            "name": "soulsilver",
+            "url": "https://pokeapi.co/api/v2/version/16/"
+          }
+        }
+      ]
+    }
+  ],
+  "game_index": 98,
+  "id": 281,
+  "location": {
+    "name": "cerulean-city",
+    "url": "https://pokeapi.co/api/v2/location/68/"
+  },
+  "name": "cerulean-city-area",
+  "names": [
+    {
+      "language": {
+        "name": "en",
+        "url": "https://pokeapi.co/api/v2/language/9/"
+      },
+      "name": "Cerulean City"
+    }
+  ],
+  "pokemon_encounters": [
+    {
+      "pokemon": {
+        "name": "squirtle",
+        "url": "https://pokeapi.co/api/v2/pokemon/7/"
+      },
+      "version_details": [
+        {
+          "encounter_details": [
+            {
+              "chance": 100,
+              "condition_values": [],
+              "max_level": 10,
+              "method": {
+                "name": "gift",
+                "url": "https://pokeapi.co/api/v2/encounter-method/18/"
+              },
+              "min_level": 10
+            }
+          ],
+          "max_chance": 100,
+          "version": {
+            "name": "yellow",
+            "url": "https://pokeapi.co/api/v2/version/3/"
+          }
+        }
+      ]
+    }
+  ]
+}
