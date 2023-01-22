@@ -39,7 +39,6 @@ class PokemonRepository @Inject constructor(
             )
         },
         shouldFetch = {
-            // TODO
             it.size < 3
         }
     )

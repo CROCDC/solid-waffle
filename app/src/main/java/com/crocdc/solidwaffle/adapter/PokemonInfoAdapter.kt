@@ -1,6 +1,7 @@
 package com.crocdc.solidwaffle.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.crocdc.solidwaffle.fragments.AbilitiesFragment
@@ -18,14 +19,17 @@ class PokemonInfoAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     @SuppressLint("NotifyDataSetChanged")
     fun setFragments(list: List<ViewPagerFragment>) {
         fragments = list
+        Log.e("CROCDC", list.toString())
         notifyDataSetChanged()
     }
+
+    override fun getItemId(position: Int): Long = fragments[position].title.toLong()
 
     override fun createFragment(position: Int): Fragment =
         when (val fragment = fragments.getOrNull(position)) {
             is ViewPagerFragment.Moves -> MovesFragment.newInstance(fragment.name)
-            is ViewPagerFragment.Evolution -> EvolutionsFragment.newInstance(fragment.name)
-            is ViewPagerFragment.Areas -> AreasFragment.newInstance(fragment.name)
+            is ViewPagerFragment.Evolution -> EvolutionsFragment()
+            is ViewPagerFragment.Areas -> AreasFragment()
             is ViewPagerFragment.Abilities -> AbilitiesFragment.newInstance(fragment.name)
             null -> throw UnsupportedOperationException()
         }

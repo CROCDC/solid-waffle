@@ -1,5 +1,6 @@
 package com.crocdc.datacore
 
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
@@ -24,6 +25,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
             saveFetchResult(fetch())
             query()
         } catch (throwable: Throwable) {
+            Log.e("CROCDC", throwable.toString())
             onFetchFailed(throwable)
             query()
         }

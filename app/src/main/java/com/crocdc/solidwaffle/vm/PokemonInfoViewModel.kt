@@ -36,7 +36,7 @@ class PokemonInfoViewModel @Inject constructor(
 
     val pokemonInfo: Flow<PokemonInfo?> = pokemonInfoUseCase.invoke(name)
 
-    private val evolutions: Flow<List<FromEvolutionTo>> = evolutionsUseCase.invoke(name)
+    val evolutions: Flow<List<FromEvolutionTo>> = evolutionsUseCase.invoke(name)
 
     val imageOptions = pokemonInfo.map {
         it?.let {
@@ -47,7 +47,7 @@ class PokemonInfoViewModel @Inject constructor(
         } ?: emptyList()
     }
 
-    private val areas: Flow<List<Area>> = areasUseCase.invoke(name)
+    val areas: Flow<List<Area>> = areasUseCase.invoke(name)
 
     val fragments: Flow<List<ViewPagerFragment>> = merge(areas, pokemonInfo, evolutions).map {
         getFragments(areas.first(), pokemonInfo.first(), evolutions.first())
@@ -74,14 +74,14 @@ class PokemonInfoViewModel @Inject constructor(
     ) = info?.let {
         listOfNotNull(
             if (evolutions.isNotEmpty()) {
-                ViewPagerFragment.Evolution(it.name)
+                ViewPagerFragment.Evolution()
             } else {
                 null
             },
             ViewPagerFragment.Moves(it.name),
             ViewPagerFragment.Abilities(it.name),
             if (areas.isNotEmpty()) {
-                ViewPagerFragment.Areas(it.name)
+                ViewPagerFragment.Areas()
             } else {
                 null
             }
