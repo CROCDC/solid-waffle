@@ -27,7 +27,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginTop="125dp"
-                        android:background="@drawable/bkg_white_rounded"
+                        android:background="@drawable/bkg_rounded"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="@id/img" />
 
@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="21dp"
-                        android:textColor="@color/gray_4F4F4F"
+                        android:textColor="@color/text"
                         android:textSize="40sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:background="@color/white"
+            android:background="@color/background"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.cardview.widget.CardView
@@ -104,10 +104,9 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tabMode="auto"
-                    app:tabSelectedTextColor="@color/gray_666666"
-                    app:tabTextColor="@color/gray_666666" />
+                    app:tabSelectedTextColor="@color/text"
+                    app:tabTextColor="@color/text" />
             </androidx.cardview.widget.CardView>
-
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"

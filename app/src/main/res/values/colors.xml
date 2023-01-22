@@ -7,7 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gray_4F4F4F">#4F4F4F</color>
     <color name="fire">#FE9E54</color>
     <color name="water">#559EDF</color>
     <color name="dark">#5F606D</color>
@@ -26,6 +25,7 @@
     <color name="psychic">#F87C7A</color>
     <color name="rock">#CBC194</color>
     <color name="steel">#5094A1</color>
-    <color name="gray_DFDFDF">#DFDFDF</color>
-    <color name="gray_666666">#666666</color>
+    <color name="text">#4F4F4F</color>
+    <color name="background_lines">#4F4F4F</color>
+    <color name="background">#FFFFFF</color>
 </resources>
