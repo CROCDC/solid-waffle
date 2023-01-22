@@ -10,8 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_IDLE
 import com.crocdc.solidwaffle.R
-import com.crocdc.solidwaffle.adapter.PokemonInfoAdapter
+import com.crocdc.solidwaffle.adapter.PokemonFragmentAdapter
 import com.crocdc.solidwaffle.adapter.TypeAdapter
 import com.crocdc.solidwaffle.databinding.FragmentPokemonInfoBinding
 import com.crocdc.solidwaffle.fetchImage
@@ -36,8 +38,8 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         val typeAdapter = TypeAdapter()
         binding.recyclerTypes.adapter = typeAdapter
         binding.txtName.text = args.name
-        val pokemonInfoAdapter = PokemonInfoAdapter(this)
-        binding.viewPager.adapter = pokemonInfoAdapter
+        val pokemonFragmentAdapter = PokemonFragmentAdapter(this)
+        binding.viewPager.adapter = pokemonFragmentAdapter
 
         lifecycleScope.launch {
             viewModel.selectedImage.collect { it ->
@@ -65,7 +67,7 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.fragments.collect { fragments ->
-                    pokemonInfoAdapter.setFragments(fragments)
+                    pokemonFragmentAdapter.setFragments(fragments)
                     TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
                         fragments.getOrNull(position)?.let {
                             tab.setText(it.title)
