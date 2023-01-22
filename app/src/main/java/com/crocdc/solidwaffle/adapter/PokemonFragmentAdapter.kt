@@ -9,7 +9,7 @@ import com.crocdc.solidwaffle.fragments.EvolutionsFragment
 import com.crocdc.solidwaffle.fragments.MovesFragment
 import com.crocdc.solidwaffle.vo.ViewPagerFragment
 
-class PokemonInfoAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class PokemonFragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     private var fragments: List<ViewPagerFragment> = emptyList()
 
@@ -20,8 +20,6 @@ class PokemonInfoAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
         fragments = list
         notifyDataSetChanged()
     }
-
-    override fun getItemId(position: Int): Long = fragments[position].title.toLong()
 
     override fun createFragment(position: Int): Fragment =
         when (val fragment = fragments.getOrNull(position)) {
