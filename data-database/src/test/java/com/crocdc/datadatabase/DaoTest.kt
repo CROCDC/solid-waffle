@@ -6,7 +6,7 @@ import org.junit.After
 import org.junit.Before
 import java.io.IOException
 
-class DaoTest {
+open class DaoTest {
 
     lateinit var db: PokemonDatabase
 
