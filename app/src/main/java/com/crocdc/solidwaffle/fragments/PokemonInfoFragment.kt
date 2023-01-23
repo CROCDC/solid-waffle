@@ -31,6 +31,8 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
 
     private val viewModel: PokemonInfoViewModel by viewModels()
 
+    private lateinit var tabLayoutMediator: TabLayoutMediator
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val typeAdapter = TypeAdapter()
@@ -66,11 +68,13 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.fragments.collect { fragments ->
                     pokemonFragmentAdapter.setFragments(fragments)
-                    TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-                        fragments.getOrNull(position)?.let {
-                            tab.setText(it.title)
+                    tabLayoutMediator =
+                        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+                            fragments.getOrNull(position)?.let {
+                                tab.setText(it.title)
+                            }
                         }
-                    }.attach()
+                    tabLayoutMediator.attach()
                 }
             }
         }
@@ -91,6 +95,13 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
                     }
                 }
             }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (::tabLayoutMediator.isInitialized) {
+            tabLayoutMediator.detach()
         }
     }
 }
