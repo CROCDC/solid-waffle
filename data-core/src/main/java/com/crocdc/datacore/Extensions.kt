@@ -7,12 +7,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-// TODO improve status
 inline fun <ResultType, RequestType> networkBoundResource(
     crossinline query: () -> Flow<ResultType>,
     crossinline fetch: suspend () -> RequestType,
     crossinline saveFetchResult: suspend (RequestType) -> Unit,
-    crossinline onFetchFailed: (Throwable) -> Unit = { },
     crossinline shouldFetch: (ResultType) -> Boolean = { true }
 ) = flow {
     val data = query().first()
@@ -24,7 +22,6 @@ inline fun <ResultType, RequestType> networkBoundResource(
             saveFetchResult(fetch())
             query()
         } catch (throwable: Throwable) {
-            onFetchFailed(throwable)
             query()
         }
     } else {

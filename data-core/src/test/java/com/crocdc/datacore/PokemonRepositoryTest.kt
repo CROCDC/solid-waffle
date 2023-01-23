@@ -15,7 +15,6 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
-// TODO add more tests
 class PokemonRepositoryTest {
 
     private val dataSource: PokemonDataSourceProvider = mockk()

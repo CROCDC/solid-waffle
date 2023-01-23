@@ -21,9 +21,6 @@ class EvolutionsRepository @Inject constructor(
                 }
             }
         },
-        shouldFetch = { it == null },
-        onFetchFailed = {
-            throw it
-        }
+        shouldFetch = { it == null }
     )
 }
