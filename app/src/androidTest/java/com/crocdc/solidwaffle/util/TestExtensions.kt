@@ -3,15 +3,14 @@ package com.crocdc.solidwaffle.util
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import androidx.annotation.StyleRes
 import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.crocdc.solidwaffle.HiltActivityForTest
+import com.crocdc.solidwaffle.R
 
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
-    @StyleRes themeResId: Int,
     bundle: Bundle? = null,
     crossinline action: Fragment.() -> Unit = {}
 ) {
@@ -22,7 +21,7 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
         )
     ).putExtra(
         "androidx.fragment.app.testing.FragmentScenario.EmptyFragmentActivity.THEME_EXTRAS_BUNDLE_KEY",
-        themeResId
+        R.style.Theme_SolidWaffle,
     )
 
     ActivityScenario.launch<HiltActivityForTest>(startActivityIntent).onActivity { activity ->

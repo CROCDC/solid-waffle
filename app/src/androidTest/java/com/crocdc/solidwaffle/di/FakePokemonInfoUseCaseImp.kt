@@ -2,7 +2,6 @@ package com.crocdc.solidwaffle.di
 
 import com.crocdc.domain.model.Ability
 import com.crocdc.domain.model.PokemonInfo
-import com.crocdc.domain.model.PokemonMove
 import com.crocdc.domain.model.Type
 import com.crocdc.solidwaffle.util.MockFactory
 import com.crocdc.usecase.PokemonInfoUseCase
@@ -20,7 +19,7 @@ class FakePokemonInfoUseCaseImp : PokemonInfoUseCase {
                 Ability("name", false)
             ),
             listOf(
-                PokemonMove("name")
+                MockFactory.move
             )
         )
     )

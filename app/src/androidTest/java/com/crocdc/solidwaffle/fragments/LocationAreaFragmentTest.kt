@@ -21,7 +21,6 @@ class LocationAreaFragmentTest {
     @Test
     fun showNameAndPokemons() {
         launchFragmentInHiltContainer<LocationAreaFragment>(
-            R.style.Theme_SolidWaffle,
             bundleOf("id" to "id")
         )
 
