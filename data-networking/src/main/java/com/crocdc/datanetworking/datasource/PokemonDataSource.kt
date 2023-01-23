@@ -1,13 +1,13 @@
 package com.crocdc.datanetworking.datasource
 
 import com.crocdc.datanetworking.BuildConfig
+import com.crocdc.datanetworking.execute
 import com.crocdc.modelnetworking.PokemonInfo
 import com.crocdc.modelnetworking.PokemonsResponse
 import com.crocdc.modelnetworking.Resource
 import com.squareup.moshi.Moshi
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import javax.inject.Inject
 
 class PokemonDataSource @Inject constructor(
@@ -21,34 +21,15 @@ class PokemonDataSource @Inject constructor(
         .addPathSegment("v2")
         .addPathSegment("pokemon")
 
-    override fun getPokemonsListing(): Resource<PokemonsResponse> {
-        request.addQueryParameter("limit", "151")
+    override fun getPokemonsListing(): Resource<PokemonsResponse> =
+        okHttpClient.execute(
+            moshi,
+            request.addQueryParameter("limit", "151")
+        )
 
-        val response =
-            okHttpClient.newCall(Request.Builder().url(request.build()).build()).execute()
-        val json = response.body?.source()
-        return if (response.code == 200 && json != null) {
-            Resource.success(
-                moshi.adapter(PokemonsResponse::class.java)
-                    .fromJson(json)
-            )
-        } else {
-            Resource.error()
-        }
-    }
-
-    override fun getPokemonInfo(name: String): Resource<PokemonInfo> {
-        request.addPathSegment(name)
-
-        val response =
-            okHttpClient.newCall(Request.Builder().url(request.build()).build()).execute()
-        val json = response.body?.source()
-        return if (response.code == 200 && json != null) {
-            Resource.success(
-                moshi.adapter(PokemonInfo::class.java).fromJson(json)
-            )
-        } else {
-            Resource.error()
-        }
-    }
+    override fun getPokemonInfo(name: String): Resource<PokemonInfo> =
+        okHttpClient.execute(
+            moshi,
+            request.addPathSegment(name)
+        )
 }

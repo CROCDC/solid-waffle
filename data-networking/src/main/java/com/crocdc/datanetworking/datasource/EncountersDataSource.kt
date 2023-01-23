@@ -1,13 +1,12 @@
 package com.crocdc.datanetworking.datasource
 
 import com.crocdc.datanetworking.BuildConfig
-import com.crocdc.modelnetworking.Resource
+import com.crocdc.datanetworking.execute
 import com.crocdc.modelnetworking.Encounter
+import com.crocdc.modelnetworking.Resource
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import javax.inject.Inject
 
 class EncountersDataSource @Inject constructor(
@@ -21,23 +20,9 @@ class EncountersDataSource @Inject constructor(
         .addPathSegment("v2")
         .addPathSegment("pokemon")
 
-    override fun getEncounters(name: String): Resource<List<Encounter>> {
-        request.addPathSegment(name).addPathSegment("encounters")
-
-        val response =
-            okHttpClient.newCall(Request.Builder().url(request.build()).build()).execute()
-        val json = response.body?.source()
-        return if (response.code == 200 && json != null) {
-            Resource.success(
-                moshi.adapter<List<Encounter>>(
-                    Types.newParameterizedType(
-                        List::class.java,
-                        Encounter::class.java
-                    )
-                ).fromJson(json)
-            )
-        } else {
-            Resource.error()
-        }
-    }
+    override fun getEncounters(name: String): Resource<List<Encounter>> =
+        okHttpClient.execute(
+            moshi,
+            request.addPathSegment(name).addPathSegment("encounters")
+        )
 }
