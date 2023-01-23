@@ -14,7 +14,7 @@ class PokemonSpeciesDataSource @Inject constructor(
     private val moshi: Moshi
 ) : PokemonSpeciesDataSourceProvider {
 
-    private val request: HttpUrl.Builder = HttpUrl.Builder()
+    fun builder() = HttpUrl.Builder()
         .scheme("https").host(BuildConfig.URL_API)
         .addPathSegment("api")
         .addPathSegment("v2")
@@ -23,6 +23,6 @@ class PokemonSpeciesDataSource @Inject constructor(
     override fun getPokemonSpecies(name: String): Resource<PokemonsSpeciesResponse> =
         okHttpClient.execute(
             moshi,
-            request.addPathSegment(name)
+            builder().addPathSegment(name)
         )
 }

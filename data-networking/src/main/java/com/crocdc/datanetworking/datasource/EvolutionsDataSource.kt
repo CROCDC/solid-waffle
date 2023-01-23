@@ -14,7 +14,7 @@ class EvolutionsDataSource @Inject constructor(
     private val moshi: Moshi,
 ) : EvolutionsDataSourceProvider {
 
-    private val request: HttpUrl.Builder = HttpUrl.Builder()
+    fun builder() = HttpUrl.Builder()
         .scheme("https").host(BuildConfig.URL_API)
         .addPathSegment("api")
         .addPathSegment("v2")
@@ -22,6 +22,6 @@ class EvolutionsDataSource @Inject constructor(
 
     override fun getEvolutions(evolutionChain: String): Resource<EvolutionResponse> =
         okHttpClient.execute(
-            moshi, request.addPathSegment(evolutionChain)
+            moshi, builder().addPathSegment(evolutionChain)
         )
 }

@@ -15,7 +15,7 @@ class PokemonDataSource @Inject constructor(
     private val moshi: Moshi
 ) : PokemonDataSourceProvider {
 
-    private val request: HttpUrl.Builder = HttpUrl.Builder()
+    fun builder() = HttpUrl.Builder()
         .scheme("https").host(BuildConfig.URL_API)
         .addPathSegment("api")
         .addPathSegment("v2")
@@ -24,12 +24,12 @@ class PokemonDataSource @Inject constructor(
     override fun getPokemonsListing(): Resource<PokemonsResponse> =
         okHttpClient.execute(
             moshi,
-            request.addQueryParameter("limit", "151")
+            builder().addQueryParameter("limit", "151")
         )
 
     override fun getPokemonInfo(name: String): Resource<PokemonInfo> =
         okHttpClient.execute(
             moshi,
-            request.addPathSegment(name)
+            builder().addPathSegment(name)
         )
 }
