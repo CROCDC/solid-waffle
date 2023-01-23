@@ -11,10 +11,10 @@ object PokemonInfoEntityMapper : BaseMapper<PokemonInfo, PokemonInfoEntity>() {
     override fun transform(inputModel: PokemonInfo): PokemonInfoEntity = PokemonInfoEntity(
         inputModel.name,
         inputModel.types.map { Type(it.type.name) },
-        inputModel.moves.map { it ->
+        inputModel.moves.map { moves ->
             Move(
-                it.move.name,
-                it.versionGroupDetails.map {
+                moves.move.name,
+                moves.versionGroupDetails.map {
                     LearnedAt(
                         it.levelLearnedAt,
                         it.moveLearnMethod.name

@@ -11,15 +11,15 @@ class EvolutionEntityMapper(private val chain: String) :
     override fun transform(inputModel: EvolutionResponse): EvolutionEntity? {
         val evolvesTo = inputModel.chain.evolvesTo.firstOrNull()
         val evolvesTo2 = evolvesTo?.evolvesTo?.firstOrNull()
-        return evolvesTo?.let {
+        return evolvesTo?.let { evolvesTo1 ->
             EvolutionEntity(
                 chain,
                 PokemonEvolution(inputModel.chain.species.name, inputModel.chain.species.urlToId()),
                 EvolvesTo(
-                    it.evolutionDetails.firstOrNull()?.minLevel,
+                    evolvesTo1.evolutionDetails.firstOrNull()?.minLevel,
                     PokemonEvolution(
-                        it.species.name,
-                        it.species.urlToId()
+                        evolvesTo1.species.name,
+                        evolvesTo1.species.urlToId()
                     ),
                     evolvesTo2?.let {
                         EvolvesTo2(

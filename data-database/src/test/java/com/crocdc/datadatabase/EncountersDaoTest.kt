@@ -14,7 +14,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class EncountersDaoTest : DaoTest() {
 
-    val dao: Lazy<EncountersDao> = lazy {
+    private val dao: Lazy<EncountersDao> = lazy {
         db.encountersDao()
     }
 
@@ -22,7 +22,7 @@ class EncountersDaoTest : DaoTest() {
     @Test
     @Throws(Exception::class)
     fun saveAndGet() = runTest {
-        val encounters = EncountersEntity(name, listOf(Encounter("area")))
+        val encounters = EncountersEntity(name, listOf(Encounter("area", "id")))
         dao.value.save(encounters)
         dao.value.getEncountersEntity(name).take(1).collect {
             TestCase.assertEquals(name, it?.name)

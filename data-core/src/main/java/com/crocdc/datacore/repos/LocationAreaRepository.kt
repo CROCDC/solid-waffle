@@ -14,8 +14,8 @@ class LocationAreaRepository @Inject constructor(
     fun getLocationArea(id: String) = networkBoundResource(
         query = { dao.getLocationAreaEntity(id) },
         fetch = { dataSource.getLocationArea(id) },
-        saveFetchResult = {
-            it.data?.let {
+        saveFetchResult = { r ->
+            r.data?.let {
                 dao.save(LocationAreaMapper(id).transform(it))
             }
         }

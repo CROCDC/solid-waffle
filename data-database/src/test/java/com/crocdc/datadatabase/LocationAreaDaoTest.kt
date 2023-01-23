@@ -15,7 +15,7 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class LocationAreaDaoTest : DaoTest() {
 
-    val dao: Lazy<LocationAreaDao> = lazy {
+    private val dao: Lazy<LocationAreaDao> = lazy {
         db.locationAreaDao()
     }
 

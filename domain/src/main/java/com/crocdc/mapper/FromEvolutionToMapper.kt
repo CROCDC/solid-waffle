@@ -11,12 +11,14 @@ object FromEvolutionToMapper : BaseMapper<EvolutionEntity, List<FromEvolutionTo>
             FromEvolutionTo(
                 Pokemon(
                     inputModel.evolvesTo.pokemonEvolution.name,
-                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${inputModel.evolvesTo.pokemonEvolution.id}.png"
+                    "https://raw.githubusercontent.com/PokeAPI/sprites" +
+                        "/master/sprites/pokemon/${inputModel.evolvesTo.pokemonEvolution.id}.png"
                 ),
                 it.minLevel,
                 Pokemon(
                     it.pokemonEvolution.name,
-                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${it.pokemonEvolution.id}.png"
+                    "https://raw.githubusercontent.com/PokeAPI/sprites" +
+                        "/master/sprites/pokemon/${it.pokemonEvolution.id}.png"
                 )
             )
         }
@@ -24,12 +26,14 @@ object FromEvolutionToMapper : BaseMapper<EvolutionEntity, List<FromEvolutionTo>
             FromEvolutionTo(
                 Pokemon(
                     inputModel.basePokemon.name,
-                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${inputModel.basePokemon.id}.png"
+                    "https://raw.githubusercontent.com/PokeAPI/sprites" +
+                        "/master/sprites/pokemon/${inputModel.basePokemon.id}.png"
                 ),
                 inputModel.evolvesTo.minLevel,
                 Pokemon(
                     inputModel.evolvesTo.pokemonEvolution.name,
-                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${inputModel.evolvesTo.pokemonEvolution.id}.png"
+                    "https://raw.githubusercontent.com/PokeAPI/sprites" +
+                        "/master/sprites/pokemon/${inputModel.evolvesTo.pokemonEvolution.id}.png"
                 )
             )
         ).plus(second).filterNotNull()

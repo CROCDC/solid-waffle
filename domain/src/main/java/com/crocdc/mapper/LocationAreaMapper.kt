@@ -11,7 +11,8 @@ object LocationAreaMapper : BaseMapper<LocationAreaEntity, LocationArea>() {
             inputModel.pokemonEncounters.map {
                 PokemonEncounter(
                     it.pokemon.name,
-                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${it.pokemon.id}.png"
+                    "https://raw.githubusercontent.com/PokeAPI" +
+                        "/sprites/master/sprites/pokemon/${it.pokemon.id}.png"
                 )
             }
         )
