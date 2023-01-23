@@ -13,11 +13,13 @@ import com.crocdc.usecase.PokemonInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -49,9 +51,13 @@ class PokemonInfoViewModel @Inject constructor(
 
     val areas: Flow<List<Area>> = areasUseCase.invoke(name)
 
-    val fragments: Flow<List<ViewPagerFragment>> = merge(areas, pokemonInfo, evolutions).map {
+    val fragments: StateFlow<List<ViewPagerFragment>> = merge(areas, pokemonInfo, evolutions).map {
         getFragments(areas.first(), pokemonInfo.first(), evolutions.first())
-    }
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        listOf()
+    )
 
     init {
         viewModelScope.launch {
