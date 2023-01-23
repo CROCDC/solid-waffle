@@ -6,6 +6,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.di.FakePokemonListingUseCaseImp
+import com.crocdc.solidwaffle.util.MockFactory
 import com.crocdc.solidwaffle.util.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -20,6 +21,6 @@ class PokemonListingFragmentTest {
     @Test
     fun recyclerShowListItems() {
         launchFragmentInHiltContainer<PokemonListingFragment>(R.style.Theme_SolidWaffle)
-        onView(withText(FakePokemonListingUseCaseImp.name)).check(matches(isDisplayed()))
+        onView(withText(MockFactory.pokemonName)).check(matches(isDisplayed()))
     }
 }

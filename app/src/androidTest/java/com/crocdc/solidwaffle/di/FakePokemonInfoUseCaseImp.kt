@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class FakePokemonInfoUseCaseImp : PokemonInfoUseCase {
     override fun invoke(name: Flow<String?>): Flow<PokemonInfo?> = MutableStateFlow(
         PokemonInfo(
-            "Squirtle",
+            MockFactory.pokemonName,
             MockFactory.image,
             "",
             types,
@@ -26,7 +26,6 @@ class FakePokemonInfoUseCaseImp : PokemonInfoUseCase {
     )
 
     companion object {
-        const val name: String = "Squirtle"
         val types = listOf(Type.WATER)
     }
 }

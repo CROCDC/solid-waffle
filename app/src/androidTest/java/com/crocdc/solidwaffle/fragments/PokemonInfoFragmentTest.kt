@@ -8,6 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.crocdc.solidwaffle.R
 import com.crocdc.solidwaffle.di.FakePokemonInfoUseCaseImp
+import com.crocdc.solidwaffle.util.MockFactory
 import com.crocdc.solidwaffle.util.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -24,12 +25,12 @@ class PokemonInfoFragmentTest {
     fun showPokemonNameAndTypes() {
         launchFragmentInHiltContainer<PokemonInfoFragment>(
             R.style.Theme_SolidWaffle,
-            bundleOf("name" to FakePokemonInfoUseCaseImp.name)
+            bundleOf("name" to MockFactory.pokemonName)
         )
         onView(
             allOf(
                 withId(R.id.txt_name),
-                withText(FakePokemonInfoUseCaseImp.name)
+                withText(MockFactory.pokemonName)
             )
         ).check(matches(isDisplayed()))
 
