@@ -1,5 +1,6 @@
 package com.crocdc.solidwaffle.util
 
+import com.crocdc.domain.model.Ability
 import com.crocdc.domain.model.FromEvolutionTo
 import com.crocdc.domain.model.Pokemon
 import com.crocdc.domain.model.PokemonMove
@@ -20,4 +21,6 @@ object MockFactory {
         )
     )
     val move = PokemonMove("Tackle")
+
+    val ability = Ability("fire", false)
 }

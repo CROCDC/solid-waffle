@@ -76,6 +76,19 @@ class PokemonInfoFragmentTest {
         ).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun showAbilities() {
+        launchFragmentInHiltContainer<PokemonInfoFragment>(bundle)
+        onView(withId(R.id.tab_layout)).perform(selectTabAtPosition(2))
+        Thread.sleep(200)
+        onView(
+            allOf(
+                withId(R.id.txt_name),
+                withText(MockFactory.ability.name)
+            )
+        ).check(matches(isDisplayed()))
+    }
+
     private fun selectTabAtPosition(tabIndex: Int): ViewAction {
         return object : ViewAction {
             override fun getDescription() = "with tab at index $tabIndex"
