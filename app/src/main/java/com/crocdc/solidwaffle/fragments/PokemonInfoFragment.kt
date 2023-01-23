@@ -42,8 +42,10 @@ class PokemonInfoFragment : Fragment(R.layout.fragment_pokemon_info) {
         binding.viewPager.adapter = pokemonFragmentAdapter
 
         lifecycleScope.launch {
-            viewModel.selectedImage.collect { imageOption ->
-                imageOption?.image?.let { binding.img.fetchImage(it) }
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.selectedImage.collect { imageOption ->
+                    imageOption?.image?.let { binding.img.fetchImage(it) }
+                }
             }
         }
         lifecycleScope.launch {
